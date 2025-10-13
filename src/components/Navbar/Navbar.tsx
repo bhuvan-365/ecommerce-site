@@ -21,25 +21,25 @@ const Navbar = () => {
             href: "/women",
             megaMenu: [
                 { name: "Outerwear", img: "/tshirt.jfif" },
-                { name: "T-Shirts, Sweats & Fleece", img: "/shirts.jfif" },
-                { name: "Sweaters & Cardigans", img: "/images/sweater.jpg" },
-                { name: "Shirts & Blouses", img: "/images/shirt.jpg" },
+                { name: "T-Shirts, Sweats & Fleece", img: "/shirt.jfif" },
+                { name: "Sweaters & Cardigans", img: "/tshirt.jfif" },
+                { name: "Shirts & Blouses", img: "/shirt.jfif" },
             ],
         },
         {
             name: "MEN",
             href: "/men",
             megaMenu: [
-                { name: "Outerwear", img: "/images/outerwear.jpg" },
-                { name: "T-Shirts & Polos", img: "/images/tshirts.jpg" },
+                { name: "Outerwear", img: "/shirt.jfif" },
+                { name: "T-Shirts & Polos", img: "/images/tshirts.jfif" },
             ],
         },
         {
             name: "KIDS",
             href: "/kids",
             megaMenu: [
-                { name: "Toys", img: "/images/toys.jpg" },
-                { name: "Clothing", img: "/images/kids-clothing.jpg" },
+                { name: "Toys", img: "/images/tshirts.jfif" },
+                { name: "Clothing", img: "/images/shirt.jfif" },
             ],
         },
     ];
@@ -116,7 +116,7 @@ const Navbar = () => {
                     {links.map((link) => (
                         <div
                             key={link.href}
-                            className="relative"
+                            className=""
                             onMouseEnter={() => setDropdownOpen(link.megaMenu ? link.name : "")}
                             onMouseLeave={() => setDropdownOpen("")}
                         >
@@ -138,11 +138,11 @@ const Navbar = () => {
                                     ref={(el) =>
                                         (dropdownRefs.current[link.name] = el as HTMLDivElement)
                                     }
-                                    className="absolute left-0 top-full w-screen bg-white border-t border-gray-200 shadow-lg grid grid-cols-4 gap-8 p-10 overflow-hidden"
+                                    className="absolute left-[-525px] top-[40px] w-screen bg-white border-t border-gray-200 shadow-lg grid grid-cols-4 gap-8 p-10 overflow-hidden"
                                     style={{
                                         height: 0,
                                         opacity: 0,
-                                        transform: "translateY(-20px)",
+                                        transform: "translateY(-25px)",
                                         display: "none",
                                     }}
                                 >

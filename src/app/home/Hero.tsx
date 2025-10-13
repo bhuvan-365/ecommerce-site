@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
                 trigger: imageDivRef.current,
                 markers: false,
                 start: "top 20%",
-                end: "top -180%",
+                end: "top -130%",
                 pin: true,
                 pinSpacing: true,
                 pinReparent: true,
@@ -83,14 +83,14 @@ const Hero: React.FC = () => {
 
     return (
         <>
-            <div className="relative h-screen w-[100vw] overflow-hidden">
+            <div className="relative h-screen w-[100vw] overflow-hidden focus:outline-none focus:ring-0">
                 <video
                     ref={videoRef}
                     src="https://image.hm.com/content/dam/global_campaigns/season_02/women/startpage-category-entries/wk41/9102B-16x9-video.mp4"
                     autoPlay
                     muted
                     loop
-                    className="w-full h-full object-cover border-none"
+                    className="w-full h-full object-cover border-none focus:outline-none focus:ring-0"
                 />
 
                 {/* Controls */}
@@ -120,7 +120,7 @@ const Hero: React.FC = () => {
             <div className="absolute h-[100vh] inset-0 bg-black/20">
             </div>
 
-            <div className="section2 text-black relative ">
+            <div className="section2 text-black relative mb-20">
                 <div
                     ref={imageDivRef}
                     className="z-[30] absolute h-[150px] lg:h-[20vw] rounded-3xl w-[120px] lg:w-[14vw] sm:top-20 lg:top-0 top-10 sm:left-[30vw] left-[10vw] overflow-hidden"
