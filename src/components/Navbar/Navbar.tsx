@@ -11,7 +11,9 @@ const Navbar = () => {
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
 
-    const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+    // const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+    const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
     const pathname = usePathname();
 
     const links = [
@@ -31,15 +33,15 @@ const Navbar = () => {
             href: "/men",
             megaMenu: [
                 { name: "Outerwear", img: "/shirt.jfif" },
-                { name: "T-Shirts & Polos", img: "/images/tshirts.jfif" },
+                { name: "T-Shirts & Polos", img: "/tshirts.jfif" },
             ],
         },
         {
             name: "KIDS",
             href: "/kids",
             megaMenu: [
-                { name: "Toys", img: "/images/tshirts.jfif" },
-                { name: "Clothing", img: "/images/shirt.jfif" },
+                { name: "Toys", img: "/tshirt.jfif" },
+                { name: "Clothing", img: "/shirt.jfif" },
             ],
         },
     ];
@@ -135,10 +137,15 @@ const Navbar = () => {
                             {/* Mega Menu */}
                             {link.megaMenu && (
                                 <div
-                                    ref={(el) =>
-                                        (dropdownRefs.current[link.name] = el as HTMLDivElement)
-                                    }
-                                    className="absolute left-[-525px] top-[40px] w-screen bg-white border-t border-gray-200 shadow-lg grid grid-cols-4 gap-8 p-10 overflow-hidden"
+                                    // ref={(el) =>
+                                    //     (dropdownRefs.current[link.name] = el as HTMLDivElement)
+                                    // }
+
+                                    ref={(el) => {
+                                        dropdownRefs.current[link.name] = el;
+                                    }}
+
+                                    className="fixed left-[0px] top-[60px] w-screen bg-white border-t border-gray-200 shadow-lg grid grid-cols-4 gap-8 p-10 overflow-hidden"
                                     style={{
                                         height: 0,
                                         opacity: 0,
