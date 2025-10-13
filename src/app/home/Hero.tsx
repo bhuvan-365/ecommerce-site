@@ -83,7 +83,7 @@ const Hero: React.FC = () => {
 
     return (
         <>
-            <div className="relative h-screen w-[100vw] overflow-hidden focus:outline-none focus:ring-0">
+            <div className="relative h-screen w-full overflow-hidden focus:outline-none focus:ring-0">
                 <video
                     ref={videoRef}
                     src="https://image.hm.com/content/dam/global_campaigns/season_02/women/startpage-category-entries/wk41/9102B-16x9-video.mp4"
@@ -94,10 +94,10 @@ const Hero: React.FC = () => {
                 />
 
                 {/* Controls */}
-                <div className="absolute bottom-4 right-4 flex gap-4">
+                <div className="absolute bottom-4 right-4 flex gap-4 z-50">
                     <button
                         onClick={toggleMute}
-                        className="bg-black bg-opacity-50 text-white px-3 py-2 rounded hover:bg-opacity-70 transition"
+                        className="cursor-pointer bg-black bg-opacity-50 text-white px-3 py-2 rounded hover:bg-opacity-70 transition"
                     >
                         <img
                             className="h-6 w-6"
@@ -107,7 +107,7 @@ const Hero: React.FC = () => {
                     </button>
                     <button
                         onClick={togglePlay}
-                        className="bg-black bg-opacity-50 text-white px-3 py-2 rounded hover:bg-opacity-70 transition"
+                        className="cursor-pointer bg-black bg-opacity-50 text-white px-3 py-2 rounded hover:bg-opacity-70 transition"
                     >
                         <img
                             className="h-7 w-7"

@@ -65,8 +65,16 @@ export default function EssentialsRefined() {
     emblaApi.on("select", onSelect);
   }, [emblaApi, onSelect]);
 
+  useEffect(() => {
+    if (!emblaApi) return;
+    const interval = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [emblaApi]);
+
   return (
-    <div className="min-h-screen mt-12 bg-white flex flex-col items-center justify-center px-4 py-10">
+    <div className="overflow-x-hidden min-h-screen mt-12 bg-white flex flex-col items-center justify-center px-4 py-10">
       <div className="max-w-7xl w-full">
         {/* Header */}
         <div className="flex justify-between items-center mb-5">
@@ -81,7 +89,7 @@ export default function EssentialsRefined() {
           {/* Buttons */}
           <button
             onClick={scrollPrev}
-            className="focus:outline-none focus:ring-0 absolute -left-9 top-1/2 -translate-y-1/2 z-10  p-2 rounded-full shadow hover:bg-gray-100"
+            className="focus:outline-none focus:ring-0 absolute -left-9 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full shadow hover:bg-gray-100"
           >
             <ChevronLeft size={24} />
           </button>
