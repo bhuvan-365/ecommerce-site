@@ -1,4 +1,4 @@
-"use client"
+
 import React from 'react'
 import HeroSec from './home/Hero'
 import Latest from './home/LatestArrivals'

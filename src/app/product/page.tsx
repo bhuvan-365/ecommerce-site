@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { products } from "@/lib/product";
