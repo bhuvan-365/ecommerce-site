@@ -36,7 +36,7 @@ export default function MentionSection() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
                 {mentions.map((item, index) => (
                     <div key={index} className="relative group cursor-pointer">
-                        <Image
+                        <img
                             src={item.img}
                             alt={item.title}
                             width={400}

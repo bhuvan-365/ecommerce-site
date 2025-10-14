@@ -139,12 +139,12 @@ const HeroEmbla: React.FC = () => {
                                 key={index}
                                 className="embla__slide flex-shrink-0 h-screen w-full relative"
                             >
-                                <Image
+                                <img
                                     src={item.image}
                                     alt={item.title}
-                                    fill
-                                    className="object-cover brightness-[0.65]"
-                                    priority
+
+                                    className="w-full h-full object-center object-cover brightness-[0.65]"
+
                                 />
 
                                 <div className="absolute inset-0 flex flex-col justify-center items-center md:items-start px-10 md:px-20 text-white z-10">

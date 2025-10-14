@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import React from 'react'
 
 const Brandlogo = () => {
@@ -14,7 +13,7 @@ const Brandlogo = () => {
 
                 ].map((src, i) => (
                     <div key={i} className="relative w-40 h-40 grayscale hover:grayscale-0 transition">
-                        <Image src={src} alt={`brand-${i}`} fill className="object-contain" />
+                        <img src={src} alt={`brand-${i}`}  className="w-full h-full object-center object-contain" />
                     </div>
                 ))}
             </div>
