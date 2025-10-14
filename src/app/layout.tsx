@@ -3,8 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/footer/Footer";
-import LenisProvider from "./components/LenisProvider";
 
+// ✅ Fonts setup
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -15,11 +15,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// ✅ SEO metadata
 export const metadata: Metadata = {
   title: "Ecomx",
-  description: "Discover the latest trends in fashion, electronics, and more at Ecomx. Shop now for unbeatable deals and fast shipping!",
+  description:
+    "Discover the latest trends in fashion, electronics, and more at Ecomx. Shop now for unbeatable deals and fast shipping!",
 };
 
+// ✅ Root layout (SERVER component – safe for build)
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,7 +34,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        <LenisProvider>{children}</LenisProvider>
+
+        {children}
         <Footer />
       </body>
     </html>
