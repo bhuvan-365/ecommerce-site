@@ -5,6 +5,7 @@ import NewIn from './NewIn'
 import EssentialsRefined from '../components/EssentialsRefined'
 import MoreProduct from './MoreProduct'
 import Breaker from '../components/Breaker'
+import ShopNowSection from './ShopNow'
 
 const women = () => {
   return (
@@ -18,8 +19,8 @@ const women = () => {
         image="/womens/womens.jpg"
       />
 
-      {/* <MoreProduct /> */}
-
+      <MoreProduct />
+      <ShopNowSection />
     </>
   )
 }

@@ -96,14 +96,14 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed w-full top-0 left-0 z-50 transition-all duration-500 ${showNavbar ? "translate-y-0" : "-translate-y-full"
-                } ${dropdownOpen
-                    ? "bg-white text-black shadow"
-                    : showNavbar
-                        ? " text-white"
-                        : "bg-transparent text-white"
+            className={`fixed w-full top-0 left-0 z-50 transition-all duration-500
+    ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+    ${dropdownOpen || !showNavbar || window.scrollY > 0
+                    ? "bg-white !text-zinc-800 "
+                    : "bg-transparent text-white"
                 }`}
         >
+
             <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-6 flex justify-between items-center h-16">
                 {/* Logo */}
                 <Link href="/">
@@ -126,10 +126,7 @@ const Navbar = () => {
                                 href={link.href}
                                 className={`px-1 transition-colors ${pathname === link.href
                                     ? "text-yellow-500"
-                                    : dropdownOpen
-                                        ? "text-black"
-                                        : "text-white"
-                                    } hover:text-yellow-500`}
+                                    : "hover:text-yellow-500"}`}
                             >
                                 {link.name}
                             </Link>

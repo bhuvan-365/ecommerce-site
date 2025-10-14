@@ -6,20 +6,7 @@ const Footer = () => {
     return (
         <footer className="bg-white text-gray-700  border-gray-200 mt-10">
             {/* Brand Logos */}
-            <div className="flex flex-wrap justify-center items-center gap-12 py-10 border-b">
-                {[
-                    "/logos/nobgHuba.png",
-                    "/logos/nobgLv.png",
-                    "/logos/nobgHuba.png",
-                    "/logos/nobgLv.png",
-                    "/logos/nobgHuba.png",
 
-                ].map((src, i) => (
-                    <div key={i} className="relative w-40 h-40 grayscale hover:grayscale-0 transition">
-                        <Image src={src} alt={`brand-${i}`} fill className="object-contain" />
-                    </div>
-                ))}
-            </div>
 
             {/* Social + Payment */}
             {/* <div className="flex flex-col md:flex-row justify-center md:justify-between items-center px-6 py-4 border-b gap-4">
