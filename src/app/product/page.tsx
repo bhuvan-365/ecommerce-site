@@ -1,14 +1,14 @@
 "use client";
-import React from "react";
+
+import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { products } from "@/lib/product";
 import Link from "next/link";
 
-const ProductPage = () => {
+function ProductContent() {
     const searchParams = useSearchParams();
-    const category = searchParams.get("category"); // e.g. "men", "women", "kids"
+    const category = searchParams.get("category");
 
-    // Filter products if category exists, else show all
     const filteredProducts = category
         ? products.filter((p) => p.category === category)
         : products;
@@ -51,6 +51,13 @@ const ProductPage = () => {
             </div>
         </div>
     );
-};
+}
 
-export default ProductPage;
+export default function ProductPage() {
+    return (
+        // ✅ Suspense boundary prevents static render crash
+        <Suspense fallback={<div className="p-10 text-center">Loading products...</div>}>
+            <ProductContent />
+        </Suspense>
+    );
+}
