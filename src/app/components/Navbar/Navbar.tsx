@@ -10,10 +10,9 @@ const Navbar = () => {
     const [dropdownOpen, setDropdownOpen] = useState("");
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [isScrolled, setIsScrolled] = useState(false); // new state
 
-    // const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
     const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
-
     const pathname = usePathname();
 
     const links = [
@@ -76,15 +75,15 @@ const Navbar = () => {
         });
     }, [dropdownOpen]);
 
-    // Scroll detection: hide on down, show on up
+    // Scroll detection
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
+            setIsScrolled(currentScrollY > 0); // ✅ track scroll state
+
             if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                // scrolling down
                 setShowNavbar(false);
             } else {
-                // scrolling up
                 setShowNavbar(true);
             }
             setLastScrollY(currentScrollY);
@@ -97,13 +96,12 @@ const Navbar = () => {
     return (
         <nav
             className={`fixed w-full top-0 left-0 z-50 transition-all duration-500
-    ${showNavbar ? "translate-y-0" : "-translate-y-full"}
-    ${dropdownOpen || !showNavbar || window.scrollY > 0
-                    ? "bg-white !text-zinc-800 "
-                    : "bg-transparent text-white"
-                }`}
+        ${showNavbar ? "translate-y-0" : "-translate-y-full"}
+        ${dropdownOpen || !showNavbar || isScrolled
+                    ? "bg-white !text-zinc-800"
+                    : "bg-transparent text-white"}
+      `}
         >
-
             <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-6 flex justify-between items-center h-16">
                 {/* Logo */}
                 <Link href="/">
@@ -118,15 +116,13 @@ const Navbar = () => {
                     {links.map((link) => (
                         <div
                             key={link.href}
-                            className=""
                             onMouseEnter={() => setDropdownOpen(link.megaMenu ? link.name : "")}
                             onMouseLeave={() => setDropdownOpen("")}
                         >
                             <Link
                                 href={link.href}
-                                className={`px-1 transition-colors ${pathname === link.href
-                                    ? "text-yellow-500"
-                                    : "hover:text-yellow-500"}`}
+                                className={`px-1 transition-colors ${pathname === link.href ? "text-yellow-500" : "hover:text-yellow-500"
+                                    }`}
                             >
                                 {link.name}
                             </Link>
@@ -134,15 +130,10 @@ const Navbar = () => {
                             {/* Mega Menu */}
                             {link.megaMenu && (
                                 <div
-                                    // ref={(el) =>
-                                    //     (dropdownRefs.current[link.name] = el as HTMLDivElement)
-                                    // }
-
                                     ref={(el) => {
                                         dropdownRefs.current[link.name] = el;
                                     }}
-
-                                    className="fixed left-[0px] top-[60px] w-screen bg-white border-t border-gray-200 shadow-lg grid grid-cols-4 gap-8 p-10 overflow-hidden"
+                                    className="fixed left-0 top-[60px] w-screen bg-white border-t border-gray-200 shadow-lg grid grid-cols-4 gap-8 p-10 overflow-hidden"
                                     style={{
                                         height: 0,
                                         opacity: 0,
@@ -173,12 +164,11 @@ const Navbar = () => {
                 {/* Icons */}
                 <div className="hidden md:flex space-x-4 items-center">
                     <FiSearch className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
-                    <Link href='/favItems'>
+                    <Link href="/favItems">
                         <FiHeart className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
                     </Link>
-
                     <FiUser className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
-                    <Link href='/cart'>
+                    <Link href="/cart">
                         <FiShoppingCart className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
                     </Link>
                 </div>
@@ -198,9 +188,7 @@ const Navbar = () => {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className={`block px-4 py-2 ${pathname === link.href
-                                ? "text-yellow-500 font-semibold"
-                                : "text-gray-800"
+                            className={`block px-4 py-2 ${pathname === link.href ? "text-yellow-500 font-semibold" : "text-gray-800"
                                 } hover:text-yellow-500`}
                             onClick={() => setMenuOpen(false)}
                         >
