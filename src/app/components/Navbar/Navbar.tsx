@@ -176,9 +176,14 @@ const Navbar = () => {
                 {/* Icons */}
                 <div className="hidden md:flex space-x-4 items-center">
                     <FiSearch className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
-                    <FiHeart className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
+                    <Link href='/favItems'>
+                        <FiHeart className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
+                    </Link>
+
                     <FiUser className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
-                    <FiShoppingCart className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
+                    <Link href='/cart'>
+                        <FiShoppingCart className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
+                    </Link>
                 </div>
 
                 {/* Mobile Menu Button */}

@@ -126,7 +126,7 @@ const HeroEmbla: React.FC = () => {
     }, [emblaApi, isPinned]);
 
     return (
-        <section ref={sectionRef} className="relative h-[200vh]">
+        <section ref={sectionRef} className="relative h-[300vh]">
             {/* Pinned Slider */}
             <div
                 className={`sticky top-0 h-screen w-full overflow-hidden ${isPinned ? "pointer-events-auto" : "pointer-events-none"

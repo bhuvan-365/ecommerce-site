@@ -123,7 +123,7 @@ const Hero: React.FC = () => {
             <div className="section2 text-black relative mb-20">
                 <div
                     ref={imageDivRef}
-                    className="z-[30] absolute h-[150px] lg:h-[20vw] rounded-3xl w-[120px] lg:w-[14vw] sm:top-20 lg:top-0 top-10 sm:left-[30vw] left-[10vw] overflow-hidden"
+                    className="z-[30] absolute h-[160px] lg:h-[24vw] rounded-md w-[150px] lg:w-[20vw] sm:top-20 lg:top-0 top-10 sm:left-[25vw] left-[10vw] overflow-hidden"
                 >
                     <img
                         ref={imageRef}
