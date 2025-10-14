@@ -1,4 +1,4 @@
-// components/EssentialsRefined.tsx
+
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";

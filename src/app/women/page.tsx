@@ -1,3 +1,4 @@
+"use client";
 import Video from '@/app/components/Video'
 import React from 'react'
 // import Video from '../../components/Video'
