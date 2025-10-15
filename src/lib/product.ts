@@ -1,4 +1,5 @@
 // lib/product.ts
+
 export interface Product {
     id: number;
     name: string;
@@ -7,7 +8,13 @@ export interface Product {
     hoverImage: string;
     description?: string;
     category: "men" | "women" | "kids";
-    tabs?: string[]; // <-- added tag support
+    tabs?: string[]; // tag or category labels
+
+    // --- Newly added optional fields ---
+    oldPrice?: string;       // e.g. "$86.00"
+    discount?: string;       // e.g. "50% OFF"
+    sizes?: string[];        // e.g. ["S", "M", "L", "XL"]
+    images?: string[];       // additional images for slider
 }
 
 export const products: Product[] = [
@@ -16,11 +23,18 @@ export const products: Product[] = [
         id: 1,
         name: "ASOS DESIGN stretch slim jeans in black",
         price: "$43.00",
+        oldPrice: "$86.00",
+        discount: "50% OFF",
         image: "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
         hoverImage: "/productImg/creamshirt.webp",
         description: "Slim fit, black stretch jeans. Comfortable and stylish.",
         category: "men",
         tabs: ["streetwear"],
+        sizes: ["S", "M", "L"],
+        images: [
+            "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
+            "/productImg/creamshirt.webp",
+        ],
     },
     {
         id: 2,
@@ -31,6 +45,7 @@ export const products: Product[] = [
         description: "Relaxed knit polo with notch neck.",
         category: "men",
         tabs: ["weekday"],
+        sizes: ["M", "L"],
     },
     {
         id: 3,
@@ -46,11 +61,14 @@ export const products: Product[] = [
         id: 4,
         name: "ASOS DESIGN tailored overshirt in charcoal",
         price: "$58.00",
+        oldPrice: "$72.00",
+        discount: "20% OFF",
         image: "https://k72.ca/uploads/teamMembers/Olivier_480x640-480x640.jpg",
         hoverImage: "/productImg/onepiece.jpg",
         description: "Tailored fit overshirt perfect for layering.",
         category: "men",
         tabs: ["streetwear"],
+        sizes: ["S", "M", "L", "XL"],
     },
     {
         id: 5,
@@ -66,47 +84,50 @@ export const products: Product[] = [
     // ===== WOMEN =====
     {
         id: 6,
-        name: "ASOS DESIGN cropped denim jacket in light wash",
+        name: "ASOS DESIGN cropped",
         price: "$62.00",
+        oldPrice: "$124.00",
+        discount: "50% OFF",
         image: "https://k72.ca/uploads/teamMembers/Olivier_480x640-480x640.jpg",
         hoverImage: "/productImg/creamshirt.webp",
         description: "Trendy cropped jacket for a chic streetwear vibe.",
         category: "women",
-        tabs: ["streetwear"],
+        tabs: ["latest"],
+        sizes: ["XS", "S", "M", "L"],
     },
     {
         id: 7,
-        name: "ASOS DESIGN ribbed knit top with wide sleeves",
+        name: "ASOS DESIGN ribbed",
         price: "$37.00",
         image: "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
         hoverImage: "/productImg/sweatshirt.webp",
         description: "Ribbed knit top perfect for layering or styling solo.",
         category: "women",
-        tabs: ["weekday"],
+        tabs: ["latest"],
     },
     {
         id: 8,
-        name: "ASOS DESIGN floral midi dress with tie waist",
+        name: "ASOS DESIGN floral",
         price: "$69.00",
         image: "https://k72.ca/uploads/teamMembers/Olivier_480x640-480x640.jpg",
         hoverImage: "/productImg/creamshirt.webp",
         description: "Elegant floral dress made for effortless style.",
         category: "women",
-        tabs: ["collection"],
+        tabs: ["latest"],
     },
     {
         id: 9,
-        name: "ASOS DESIGN breatheMAX™ oversized t-shirt in black",
+        name: "ASOS DESIGN breatheMAX™",
         price: "$31.00",
         image: "https://k72.ca/uploads/teamMembers/Olivier_480x640-480x640.jpg",
         hoverImage: "/productImg/sweatshirt.webp",
         description: "Breathable oversized tee for everyday comfort.",
         category: "women",
-        tabs: ["streetwear"],
+        tabs: ["latest"],
     },
     {
         id: 10,
-        name: "ASOS DESIGN boxy overshirt in sand",
+        name: "ASOS DES",
         price: "$49.00",
         image: "https://k72.ca/uploads/teamMembers/Olivier_480x640-480x640.jpg",
         hoverImage: "/productImg/sweatshirt.webp",
@@ -118,7 +139,7 @@ export const products: Product[] = [
     // ===== KIDS =====
     {
         id: 11,
-        name: "ASOS DESIGN kids cotton hoodie in navy",
+        name: "ASOS DESIGN kids",
         price: "$34.00",
         image: "https://k72.ca/uploads/teamMembers/Lawrence_480x640-480x640.jpg",
         hoverImage: "/productImg/onepiece.jpg",
@@ -128,17 +149,20 @@ export const products: Product[] = [
     },
     {
         id: 12,
-        name: "ASOS DESIGN jogger pants with stripe detail",
+        name: "ASOS DESIGN",
         price: "$39.00",
+        oldPrice: "$52.00",
+        discount: "25% OFF",
         image: "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
         hoverImage: "/productImg/creamshirt.webp",
         description: "Comfortable cotton joggers for active kids.",
         category: "kids",
         tabs: ["streetwear"],
+        sizes: ["S", "M"],
     },
     {
         id: 13,
-        name: "ASOS DESIGN stretch slim jeans in black",
+        name: "ASOS DESIGN",
         price: "$43.00",
         image: "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
         hoverImage: "/productImg/creamshirt.webp",
@@ -148,7 +172,7 @@ export const products: Product[] = [
     },
     {
         id: 14,
-        name: "ASOS DESIGN relaxed long sleeve knitted notch neck polo in black",
+        name: "ASOS DESIGN relaxed",
         price: "$43.00",
         image: "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
         hoverImage: "/productImg/creamshirt.webp",

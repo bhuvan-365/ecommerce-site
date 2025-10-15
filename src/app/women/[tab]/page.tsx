@@ -3,6 +3,7 @@
 import React from "react";
 import { useParams } from "next/navigation";
 import { products } from "@/lib/product";
+import Link from "next/link";
 
 const WomenTabPage = () => {
     const { tab } = useParams(); // e.g. "latest", "streetwear"
@@ -40,27 +41,73 @@ const WomenTabPage = () => {
     const filtered = filterProducts(tab as string);
 
     return (
-        <section className="py-8 px-6">
-            <h2 className="text-3xl font-semibold mb-6 capitalize">
-                Women’s {tab} Collection
-            </h2>
+        <section className="py-8">
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="flex justify-center items-center flex-col border-t border-b border-zinc-500 py-10 mt-12">
+                <div className="text-2xl font-thin capitalize">Women / {tab} </div>
+                <div className="text-4xl pt-4">SHOP</div>
+            </div>
+            <div className="w-full h-20 flex px-5 justify-between items-center uppercase ">
+                <div className="flex justify-center gap-2 items-center ">
+                    <span className="font-semibold text-xl">sort by</span>
+                    <img src="/plus.svg" alt="ecomx" />
+                </div>
+                <div className="flex justify-center gap-2 items-center">
+                    <span className="font-semibold text-xl"> Filter</span>
+                    <img src="/filter.svg" alt="ecomx filter" />
+                </div>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 px-2">
+
                 {filtered.map((item) => (
-                    <div key={item.id} className="border rounded overflow-hidden">
-                        <div className="relative w-full h-64">
+                    // <div key={item.id} className="border rounded overflow-hidden">
+                    //     <div className="relative w-full h-64">
+                    //         <img
+                    //             src={item.image}
+                    //             alt={item.name}
+                    //             className="w-full h-full object-cover hover:opacity-90 transition"
+                    //         />
+                    //     </div>
+                    //     <div className="p-3">
+                    //         <div className="font-medium text-sm truncate">{item.name}</div>
+                    //         <div className="text-xs text-gray-500">{item.description}</div>
+                    //         <div className="font-semibold mt-2">{item.price}</div>
+                    //     </div>
+                    // </div>
+
+
+
+
+
+                    <Link
+                        key={item.id}
+                        href={`/product/${item.id}`}
+                        className="group block "
+                    >
+                        <div className="relative w-full aspect-[3/4]  overflow-hidden">
                             <img
                                 src={item.image}
                                 alt={item.name}
-                                className="w-full h-full object-cover hover:opacity-90 transition"
+                                className="w-full h-full object-cover absolute inset-0 transition-opacity duration-300 group-hover:opacity-0"
                             />
+                            <img
+                                src={item.hoverImage}
+                                alt={`${item.name} hover`}
+                                className="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                            />
+
+                            <div className="absolute bottom-4 left-4 bg-zinc-300 px-4 py-1.5 rounded-sm font-semibold text-md"> 50% OFF</div>
                         </div>
-                        <div className="p-3">
-                            <div className="font-medium text-sm truncate">{item.name}</div>
-                            <div className="text-xs text-gray-500">{item.description}</div>
-                            <div className="font-semibold mt-2">{item.price}</div>
+
+                        <div className="px-4">
+                            <p className="mt-2 text-lg text-zinc-800">{item.name}</p>
+                            <div className="flex justify-start items-start gap-3">
+                                <p className=" font-semibold text-lg line-through text-red-500">{item.price}</p>
+                                <p className=" font-semibold text-lg ">{item.price}</p>
+                            </div>
+
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </section>
