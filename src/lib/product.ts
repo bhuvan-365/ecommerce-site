@@ -1,4 +1,3 @@
-
 // lib/product.ts
 export interface Product {
     id: number;
@@ -8,10 +7,11 @@ export interface Product {
     hoverImage: string;
     description?: string;
     category: "men" | "women" | "kids";
+    tabs?: string[]; // <-- added tag support
 }
 
 export const products: Product[] = [
-
+    // ===== MEN =====
     {
         id: 1,
         name: "ASOS DESIGN stretch slim jeans in black",
@@ -20,6 +20,7 @@ export const products: Product[] = [
         hoverImage: "/productImg/creamshirt.webp",
         description: "Slim fit, black stretch jeans. Comfortable and stylish.",
         category: "men",
+        tabs: ["streetwear"],
     },
     {
         id: 2,
@@ -29,6 +30,7 @@ export const products: Product[] = [
         hoverImage: "/productImg/creamshirt.webp",
         description: "Relaxed knit polo with notch neck.",
         category: "men",
+        tabs: ["weekday"],
     },
     {
         id: 3,
@@ -38,6 +40,7 @@ export const products: Product[] = [
         hoverImage: "/productImg/sweatshirt.webp",
         description: "Soft cotton t-shirt for a casual everyday look.",
         category: "men",
+        tabs: ["collection"],
     },
     {
         id: 4,
@@ -47,6 +50,7 @@ export const products: Product[] = [
         hoverImage: "/productImg/onepiece.jpg",
         description: "Tailored fit overshirt perfect for layering.",
         category: "men",
+        tabs: ["streetwear"],
     },
     {
         id: 5,
@@ -56,8 +60,10 @@ export const products: Product[] = [
         hoverImage: "/productImg/onepiece.jpg",
         description: "Straight fit jeans with a vintage washed look.",
         category: "men",
+        tabs: ["latest"],
     },
 
+    // ===== WOMEN =====
     {
         id: 6,
         name: "ASOS DESIGN cropped denim jacket in light wash",
@@ -66,6 +72,7 @@ export const products: Product[] = [
         hoverImage: "/productImg/creamshirt.webp",
         description: "Trendy cropped jacket for a chic streetwear vibe.",
         category: "women",
+        tabs: ["streetwear"],
     },
     {
         id: 7,
@@ -75,6 +82,7 @@ export const products: Product[] = [
         hoverImage: "/productImg/sweatshirt.webp",
         description: "Ribbed knit top perfect for layering or styling solo.",
         category: "women",
+        tabs: ["weekday"],
     },
     {
         id: 8,
@@ -84,9 +92,8 @@ export const products: Product[] = [
         hoverImage: "/productImg/creamshirt.webp",
         description: "Elegant floral dress made for effortless style.",
         category: "women",
+        tabs: ["collection"],
     },
-
-
     {
         id: 9,
         name: "ASOS DESIGN breatheMAX™ oversized t-shirt in black",
@@ -95,6 +102,7 @@ export const products: Product[] = [
         hoverImage: "/productImg/sweatshirt.webp",
         description: "Breathable oversized tee for everyday comfort.",
         category: "women",
+        tabs: ["streetwear"],
     },
     {
         id: 10,
@@ -104,7 +112,10 @@ export const products: Product[] = [
         hoverImage: "/productImg/sweatshirt.webp",
         description: "Boxy overshirt with roomy silhouette.",
         category: "women",
+        tabs: ["latest"],
     },
+
+    // ===== KIDS =====
     {
         id: 11,
         name: "ASOS DESIGN kids cotton hoodie in navy",
@@ -113,6 +124,7 @@ export const products: Product[] = [
         hoverImage: "/productImg/onepiece.jpg",
         description: "Soft and durable hoodie for daily wear.",
         category: "kids",
+        tabs: ["streetwear"],
     },
     {
         id: 12,
@@ -122,9 +134,8 @@ export const products: Product[] = [
         hoverImage: "/productImg/creamshirt.webp",
         description: "Comfortable cotton joggers for active kids.",
         category: "kids",
+        tabs: ["streetwear"],
     },
-
-
     {
         id: 13,
         name: "ASOS DESIGN stretch slim jeans in black",
@@ -132,7 +143,8 @@ export const products: Product[] = [
         image: "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
         hoverImage: "/productImg/creamshirt.webp",
         description: "Slim fit, black stretch jeans. Comfortable and stylish.",
-        category: "men",
+        category: "kids",
+        tabs: ["collection"],
     },
     {
         id: 14,
@@ -141,7 +153,8 @@ export const products: Product[] = [
         image: "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
         hoverImage: "/productImg/creamshirt.webp",
         description: "Relaxed knit polo with notch neck.",
-        category: "men",
+        category: "kids",
+        tabs: ["latest"],
     },
     {
         id: 15,
@@ -150,7 +163,7 @@ export const products: Product[] = [
         image: "https://k72.ca/uploads/teamMembers/Lawrence_480x640-480x640.jpg",
         hoverImage: "/productImg/sweatshirt.webp",
         description: "Soft cotton t-shirt for a casual everyday look.",
-        category: "men",
-    }
+        category: "kids",
+        tabs: ["weekday"],
+    },
 ];
-

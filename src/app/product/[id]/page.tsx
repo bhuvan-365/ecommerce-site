@@ -8,7 +8,7 @@ interface PageProps {
 }
 
 export default function ProductPage({ params }: PageProps) {
-    const id = parseInt(params.id, 10);
+    const id = parseInt(params.id, 10); // ✅ safe
     const product = products.find((p) => p.id === id);
 
     if (!product) {
@@ -29,7 +29,11 @@ export default function ProductPage({ params }: PageProps) {
         <div className="min-h-screen p-8 bg-white">
             <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="w-full">
-                    <img src={product.image} alt={product.name} className="w-full h-auto object-cover rounded-md" />
+                    <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-auto object-cover rounded-md"
+                    />
                 </div>
 
                 <div>
@@ -37,10 +41,13 @@ export default function ProductPage({ params }: PageProps) {
                     <p className="mt-2 text-xl font-bold">{product.price}</p>
                     <p className="mt-4 text-gray-700">{product.description}</p>
 
-                    {/* Additional details or actions */}
                     <div className="mt-6 flex gap-3">
-                        <button className="bg-black text-white px-5 py-2 rounded-md">Add to cart</button>
-                        <Link href="/" className="px-5 py-2 border rounded-md">Back</Link>
+                        <button className="bg-black text-white px-5 py-2 rounded-md">
+                            Add to cart
+                        </button>
+                        <Link href="/" className="px-5 py-2 border rounded-md">
+                            Back
+                        </Link>
                     </div>
                 </div>
             </div>

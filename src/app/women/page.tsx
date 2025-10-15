@@ -1,18 +1,19 @@
 "use client";
-import Video from '@/app/components/Video'
+import Banner from '@/app/components/Banner/Banner'
 import React from 'react'
 // import Video from '../../components/Video'
 import NewIn from './NewIn'
 import EssentialsRefined from '../components/EssentialsRefined'
-import MoreProduct from './MoreProduct'
+import MoreProduct from '../components/MoreProduct'
 import Breaker from '../components/Breaker'
-import ShopNowSection from './ShopNow'
+import ShopNowSection from '../components/ShopNow'
+import Tabs from '../components/TabLinks';
 
 const women = () => {
   return (
     <>
-      <Video src="https://www.asos-video.com/video/upload/f_auto,q_auto/HOMEPAGE_DESKTOP_v3_phvqkt.mp4" />
-      <NewIn />
+      <Banner src="https://www.asos-video.com/video/upload/f_auto,q_auto/HOMEPAGE_DESKTOP_v3_phvqkt.mp4" />
+      <Tabs category="women" />
       <EssentialsRefined category="women" />
       <Breaker
         title="Beyond Basic Wears"
@@ -21,7 +22,7 @@ const women = () => {
       />
 
       <MoreProduct />
-      <ShopNowSection />
+      <ShopNowSection category='women' />
     </>
   )
 }
