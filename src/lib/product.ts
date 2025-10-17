@@ -15,7 +15,9 @@ export interface Product {
     discount?: string;       // e.g. "50% OFF"
     sizes?: string[];        // e.g. ["S", "M", "L", "XL"]
     images?: string[];       // additional images for slider
+    colorAvai?: string[];
 }
+
 
 export const products: Product[] = [
     // ===== MEN =====
@@ -94,6 +96,16 @@ export const products: Product[] = [
         category: "women",
         tabs: ["latest"],
         sizes: ["XS", "S", "M", "L"],
+        colorAvai: ["Black", "Red", "White", "Yellow"],
+        images: [
+            "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
+            "/productImg/creamshirt.webp",
+            "/mens/men1.avif",
+            "/mens/men2.avif",
+            "/mens/men3.avif",
+            "/productImg/onepiece.jpg",
+
+        ],
     },
     {
         id: 7,

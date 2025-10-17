@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { products } from "../../../lib/product";
+import { div } from "framer-motion/client";
+import WishlistHeart from "@/app/components/Wishlist";
 
 interface PageProps {
     params: { id: string };
@@ -33,12 +35,13 @@ export default function ProductPage({ params }: PageProps) {
     }
 
     return (
-        <div className="min-h-screen bg-white px-6 py-10 md:px-12">
+        <div className="min-h-screen bg-white px-6 py-10 md:px-12 mt-12">
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
                 {/* Left Section */}
-                <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex flex-col md:flex-row gap-4 sticky top-24 s h-[90vh]">
                     {/* Thumbnail list */}
                     <div className="flex md:flex-col gap-3 order-2 md:order-1">
+
                         {product.images?.map((img, index) => (
                             <img
                                 key={index}
@@ -53,11 +56,13 @@ export default function ProductPage({ params }: PageProps) {
 
                     {/* Main Image */}
                     <div className="relative w-full order-1 md:order-2">
-                        <img
-                            src={selectedImage}
-                            alt={product.name}
-                            className="w-full h-auto object-cover rounded-md"
-                        />
+                        <div className="w-full h-[85vh]">
+                            <img
+                                src={selectedImage}
+                                alt={product.name}
+                                className="w-full h-full object-cover object-center rounded-md"
+                            />
+                        </div>
                         {/* Arrows */}
                         <button
                             onClick={() => {
@@ -65,7 +70,7 @@ export default function ProductPage({ params }: PageProps) {
                                 if (i > 0)
                                     setSelectedImage(product.images![i - 1]);
                             }}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full shadow-md p-2"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/20 shadow-md p-2"
                         >
                             ❮
                         </button>
@@ -75,7 +80,7 @@ export default function ProductPage({ params }: PageProps) {
                                 if (product.images && i < product.images.length - 1)
                                     setSelectedImage(product.images[i + 1]);
                             }}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white rounded-full shadow-md p-2"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/20 shadow-md p-2"
                         >
                             ❯
                         </button>
@@ -84,48 +89,111 @@ export default function ProductPage({ params }: PageProps) {
 
                 {/* Right Section */}
                 <div>
+                    <div className="top text-lg text-blue-600 mb-2 cursor-pointer">
+
+                        BEST SELLER | RESPONSIBLE
+
+                    </div>
                     <h1 className="text-2xl md:text-3xl font-semibold">{product.name}</h1>
-                    <p className="mt-3 text-lg font-semibold">{product.price}</p>
+                    <div className="text-2xl md:text-2xl text-zinc-600 w-full">{product.description}</div>
+                    <div className=" flex justify-between items-center py-2">
+                        <div className=" font-semibold flex justify-start items-center gap-1 text-lg text-black/70">
+
+                            <div className="flex justify-center items-center"><img src="/svgs/rating.svg" alt="ecomXRate" />  <span>4.8</span> </div>
+                            <div>(234)</div>|
+                            <div>1.2k sold</div>
+
+                        </div>
+                        <div className="flex justify-start items-center gap-2">
+                            <div className="fav">
+                                <WishlistHeart />
+                            </div>
+                            <div className="share">
+                                <img className="w-6 h-6" src="/svgs/share.svg" alt="share" />
+                            </div>
+                        </div>
+                    </div>
 
                     {/* Colour */}
-                    <div className="mt-4">
-                        <span className="font-semibold mr-2">COLOUR:</span>
-                        <span className="bg-black text-white px-2 py-1 text-sm">BLACK</span>
+                    <div className="mt-3 flex flex-col justify-start items-start">
+                        <span className="font-semibold mr-2 ">COLOUR:</span>
+                        <div className="py-2 ">
+                            {product.colorAvai?.map((Col, idx) => (
+                                <span className="bg-black/50 hover:bg-black rounded text-white px-4 py-2 text-sm mx-1 ">{Col}</span>
+
+                            ))}
+                        </div>
+
                     </div>
+
+                    <div className="py-8 pt-10 flex justify-start items-center gap-3">
+                        <p className="text-3xl font-bold text-red-500">
+                            {product.price}
+                        </p>
+                        {product.oldPrice && (
+                            <p className=" line-through text-xl font-semibold text-zinc-600">
+                                {product.oldPrice}
+                            </p>
+                        )}
+
+                        {product.discount && (
+                            <div className=" bg-green-700/70 text-white px-4 py-1.5 rounded-sm font-semibold text-lg"> {product.discount}</div>
+                        )}
+                    </div>
+
 
                     {/* Size Dropdown */}
                     {product.sizes && (
-                        <div className="mt-6">
-                            <label htmlFor="size" className="block font-semibold mb-2">
-                                SIZE:
+                        <div className="mt-2">
+                            <label htmlFor="size" className="font-semibold mb-2 flex justify-between items-center">
+                                <span>
+                                    SELECT SIZE:
+                                </span>
+                                <div>
+                                    <p className="text-sm text-blue-600 mt-1 cursor-pointer">
+                                        Size Guide
+                                    </p></div>
+
                             </label>
-                            <select
-                                id="size"
-                                value={selectedSize}
-                                onChange={(e) => setSelectedSize(e.target.value)}
-                                className="w-full border rounded-md p-2"
-                            >
-                                <option value="">Please select</option>
-                                {product.sizes.map((size, idx) => (
-                                    <option key={idx} value={size}>
-                                        {size}
-                                    </option>
-                                ))}
-                            </select>
-                            <p className="text-sm text-blue-600 mt-1 cursor-pointer">
-                                Size Guide
-                            </p>
+
+                            <div>
+                                <div className="flex flex-row s justify-start items-start gap-2">
+
+                                    {product.sizes.map((size, idx) => (
+                                        <div key={idx} className="p-2 px-7 py-2 border-[0.5px] border-zinc-500/50 rounded-4xl">
+                                            {size}
+                                        </div>
+
+                                    ))}
+                                </div>
+                            </div>
+
+
                         </div>
                     )}
 
                     {/* Add to Cart Button */}
-                    <button className="mt-6 bg-green-700 text-white font-semibold w-full py-3 rounded-md hover:bg-green-800 transition">
-                        ADD TO BAG
-                    </button>
+                    <div className="flex gap-4 w-full pt-8 ">
+                        <Link
+                            href={`/cart`}
+                            className="w-1/2 text-center border border-black bg-black text-white px-6 py-3 font-semibold hover:bg-white hover:text-black transition"
+                        >
+                            Add to Cart
+                        </Link>
+                        <Link
+                            href={`/cart`}
+                            className="w-1/2 text-center border border-black text-black px-10 py-3 font-semibold hover:bg-black hover:text-white transition"
+                        >
+                            Buy Now
+                        </Link>
+                    </div>
+
+
+
 
                     {/* Wishlist + Delivery Info */}
                     <div className="mt-4 text-sm text-gray-700 space-y-2">
-                        <p>🚚 Free delivery on qualifying orders.</p>
+                        <p> Free delivery on qualifying orders.</p>
                         <Link href="/" className="text-blue-600 underline">
                             View our Delivery & Returns Policy
                         </Link>
@@ -134,16 +202,16 @@ export default function ProductPage({ params }: PageProps) {
                     {/* Expandable Sections */}
                     <div className="mt-6 border-t pt-4 space-y-4">
                         {/* Size & Fit */}
-                        <div>
+                        <div className="text-lg">
                             <button
                                 onClick={() => setSizeOpen(!sizeOpen)}
-                                className="flex justify-between w-full font-semibold text-left"
+                                className="flex justify-between w-full font-semibold text-left "
                             >
-                                Size & Fit <span>{sizeOpen ? "−" : "+"}</span>
+                                Size & Fit <span className="text-xl">{sizeOpen ? "−" : "+"}</span>
                             </button>
                             {sizeOpen && (
                                 <p className="mt-2 text-gray-600 text-sm">
-                                    Model is 6’1” and wears size M. Regular fit.
+                                    Model is 6’1” and wears size M. Regular fit .
                                 </p>
                             )}
                         </div>
@@ -152,9 +220,9 @@ export default function ProductPage({ params }: PageProps) {
                         <div>
                             <button
                                 onClick={() => setDetailOpen(!detailOpen)}
-                                className="flex justify-between w-full font-semibold text-left"
+                                className="flex justify-between w-full font-semibold text-left text-lg"
                             >
-                                Product Details <span>{detailOpen ? "−" : "+"}</span>
+                                Product Details <span className="text-xl">{detailOpen ? "−" : "+"}</span>
                             </button>
                             {detailOpen && (
                                 <p className="mt-2 text-gray-600 text-sm">
@@ -165,7 +233,7 @@ export default function ProductPage({ params }: PageProps) {
                         </div>
                     </div>
 
-                    <Link href="/" className="block text-center mt-6 text-gray-600 hover:underline">
+                    <Link href="/" className="border h-[100vh] block text-center mt-6 text-gray-600 hover:underline">
                         ← Back
                     </Link>
                 </div>

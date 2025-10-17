@@ -95,15 +95,21 @@ const WomenTabPage = () => {
                                 alt={`${item.name} hover`}
                                 className="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                             />
+                            {item.discount && (
+                                <div className="absolute bottom-4 left-4 bg-zinc-300 px-4 py-1.5 rounded-sm font-semibold text-md"> {item.discount}</div>
+                            )}
 
-                            <div className="absolute bottom-4 left-4 bg-zinc-300 px-4 py-1.5 rounded-sm font-semibold text-md"> 50% OFF</div>
                         </div>
 
                         <div className="px-4">
                             <p className="mt-2 text-lg text-zinc-800">{item.name}</p>
                             <div className="flex justify-start items-start gap-3">
-                                <p className=" font-semibold text-lg line-through text-red-500">{item.price}</p>
-                                <p className=" font-semibold text-lg ">{item.price}</p>
+                                <p className=" font-semibold text-lg text-red-500 ">{item.price}</p>
+                                {item.oldPrice && (
+                                    <p className=" font-semibold text-lg line-through ">{item.oldPrice}</p>
+                                )}
+
+
                             </div>
 
                         </div>
