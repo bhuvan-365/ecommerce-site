@@ -8,7 +8,7 @@ interface VideoProps {
 }
 
 
-const Video:React.FC<VideoProps> = ({src}) => {
+const Video: React.FC<VideoProps> = ({ src }) => {
 
 
     const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -34,8 +34,8 @@ const Video:React.FC<VideoProps> = ({src}) => {
     };
 
 
-  return (
-    <>
+    return (
+        <>
             <div className="relative h-screen w-full overflow-hidden focus:outline-none focus:ring-0">
                 <video
                     ref={videoRef}
@@ -44,10 +44,10 @@ const Video:React.FC<VideoProps> = ({src}) => {
                     muted
                     loop
                     className="w-full h-full object-cover border-none focus:outline-none focus:ring-0"
-/>
+                />
 
                 {/* Controls */}
-                <div className="absolute bottom-4 right-4 flex gap-4 z-50">
+                <div className="absolute bottom-4 right-4 flex gap-4 z-40">
                     <button
                         onClick={toggleMute}
                         className="cursor-pointer bg-black bg-opacity-50 text-white px-3 py-2 rounded hover:bg-opacity-70 transition"
@@ -71,10 +71,11 @@ const Video:React.FC<VideoProps> = ({src}) => {
                 </div>
             </div>
             <div className="absolute h-[100vh] inset-0 bg-black/20">
-            </div>  
-{/* <Tabs /> */}
-</>
+            </div>
+            {/* <Tabs /> */}
+        </>
 
-)}
+    )
+}
 
 export default Video

@@ -79,7 +79,7 @@ const Navbar = () => {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-            setIsScrolled(currentScrollY > 0); // ✅ track scroll state
+            setIsScrolled(currentScrollY > 0); //  track scroll state
 
             if (currentScrollY > lastScrollY && currentScrollY > 100) {
                 setShowNavbar(false);
