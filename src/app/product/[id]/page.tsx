@@ -1,16 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, use } from "react";
 import Link from "next/link";
 import { products } from "../../../lib/product";
-import { div } from "framer-motion/client";
 import WishlistHeart from "@/app/components/Wishlist";
+import CartButton from "@/app/components/CartButton";
 
 interface PageProps {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }
 
 export default function ProductPage({ params }: PageProps) {
-    const id = parseInt(params.id, 10);
+    const resolvedParams = use(params);
+    const id = parseInt(resolvedParams.id, 10);
     const product = products.find((p) => p.id === id);
 
     const [selectedImage, setSelectedImage] = useState(product?.image || "");
@@ -106,7 +107,7 @@ export default function ProductPage({ params }: PageProps) {
                         </div>
                         <div className="flex justify-start items-center gap-2">
                             <div className="fav">
-                                <WishlistHeart />
+                                <WishlistHeart product={product} />
                             </div>
                             <div className="share">
                                 <img className="w-6 h-6" src="/svgs/share.svg" alt="share" />
@@ -119,8 +120,7 @@ export default function ProductPage({ params }: PageProps) {
                         <span className="font-semibold mr-2 ">COLOUR:</span>
                         <div className="py-2 ">
                             {product.colorAvai?.map((Col, idx) => (
-                                <span className="bg-black/50 hover:bg-black rounded text-white px-4 py-2 text-sm mx-1 ">{Col}</span>
-
+                                <span key={idx} className="bg-black/50 hover:bg-black rounded text-white px-4 py-2 text-sm mx-1">{Col}</span>
                             ))}
                         </div>
 
@@ -173,19 +173,8 @@ export default function ProductPage({ params }: PageProps) {
                     )}
 
                     {/* Add to Cart Button */}
-                    <div className="flex gap-4 w-full pt-8 ">
-                        <Link
-                            href={`/cart`}
-                            className="w-1/2 text-center border border-black bg-black text-white px-6 py-3 font-semibold hover:bg-white hover:text-black transition"
-                        >
-                            Add to Cart
-                        </Link>
-                        <Link
-                            href={`/cart`}
-                            className="w-1/2 text-center border border-black text-black px-10 py-3 font-semibold hover:bg-black hover:text-white transition"
-                        >
-                            Buy Now
-                        </Link>
+                    <div className="pt-8">
+                        <CartButton product={product} />
                     </div>
 
 
@@ -233,7 +222,7 @@ export default function ProductPage({ params }: PageProps) {
                         </div>
                     </div>
 
-                    <Link href="/" className="border h-[100vh] block text-center mt-6 text-gray-600 hover:underline">
+                    <Link href="/" className="border block text-center mt-6 py-3 text-gray-600 hover:underline">
                         ← Back
                     </Link>
                 </div>

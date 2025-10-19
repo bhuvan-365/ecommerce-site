@@ -1,18 +1,35 @@
 "use client";
-import { div } from "framer-motion/client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useWishlistStore } from "@/lib/useWishlistStore";
+import { Product } from "@/lib/product";
 
-const WishlistHeart = () => {
-    const [wishlisted, setWishlisted] = useState(false);
+interface WishlistHeartProps {
+    product: Product;
+}
+
+const WishlistHeart: React.FC<WishlistHeartProps> = ({ product }) => {
     const [showPopup, setShowPopup] = useState(false);
     const [popupText, setPopupText] = useState("");
+    const [isWishlisted, setIsWishlisted] = useState(false);
+    const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlistStore();
+
+    // Update wishlist state when component mounts and when store changes
+    useEffect(() => {
+        setIsWishlisted(isInWishlist(product.id));
+    }, [product.id, isInWishlist]);
 
     const toggleWishlist = () => {
-        const newState = !wishlisted;
-        setWishlisted(newState);
+        const newWishlistState = !isWishlisted;
+        setIsWishlisted(newWishlistState);
+
+        if (!newWishlistState) {
+            removeFromWishlist(product.id);
+        } else {
+            addToWishlist(product);
+        }
 
         // Set popup text
-        setPopupText(newState ? "Added to Wishlist" : "Removed from Wishlist");
+        setPopupText(newWishlistState ? "Added to Wishlist" : "Removed from Wishlist");
         setShowPopup(true);
 
         // Hide popup after 1.5 seconds
@@ -20,7 +37,7 @@ const WishlistHeart = () => {
     };
 
     return (
-        <>
+        <div className="relative">
             <button
                 onClick={toggleWishlist}
                 className="relative flex items-center gap-2 focus:outline-none"
@@ -33,7 +50,7 @@ const WishlistHeart = () => {
                     className="transition-colors duration-200"
                 >
                     <path
-                        fill={wishlisted ? "black" : "none"}
+                        fill={isWishlisted ? "black" : "none"}
                         stroke="black"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -41,20 +58,17 @@ const WishlistHeart = () => {
                         d="M19.5 12.572L12 20l-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"
                     />
                 </svg>
-
             </button>
 
             {/* Popup overlay */}
             {showPopup && (
                 <div className="fixed top-10 right-10 z-50">
-                    <div className="inset-0 flex items-center justify-center pointer-events-none">
-                        <div className="bg-black/80 text-white px-8 py-4 rounded-md">
-                            {popupText}
-                        </div>
+                    <div className="bg-black text-white px-4 py-2 rounded shadow-lg">
+                        {popupText}
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 
