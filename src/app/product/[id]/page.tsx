@@ -149,11 +149,6 @@ export default function ProductPage({ params }: PageProps) {
                         </div>
 
                     </div>
-
-
-
-
-
                     {/* Colour */}
                     {/* <div className="mt-3 flex flex-col justify-start items-start">
                         <span className="font-semibold mr-2">COLOUR:</span>
@@ -200,7 +195,6 @@ export default function ProductPage({ params }: PageProps) {
                             </div>
                         )}
                     </div> */}
-
 
                     <div className="py-8 pt-10 flex justify-start items-center gap-3">
                         <p className="text-3xl font-bold text-red-500">
@@ -279,7 +273,7 @@ export default function ProductPage({ params }: PageProps) {
                     )}
 
 
-                    <div className="flex justify-center items-center border mt-4">
+                    <div className="flex justify-center items-center  mt-4">
                         {/* Quantity Selector */}
                         <div className=" flex items-center gap-3 w-[30%]">
                             <button

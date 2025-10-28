@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
@@ -34,11 +33,22 @@ export default function EssentialsRefined({ category }: EssentialsRefinedProps) 
         emblaApi.on("select", onSelect);
     }, [emblaApi, onSelect]);
 
+    //  Auto-scroll effect
+    useEffect(() => {
+        if (!emblaApi) return;
+
+        const interval = setInterval(() => {
+            emblaApi.scrollNext();
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, [emblaApi]);
+
     return (
         <div className="min-h-screen mt-1 bg-white flex flex-col items-center justify-center px-4 py-10 overflow-x-hidden">
             <div className="max-w-7xl w-full">
                 <div className="flex justify-center items-center mb-5 noto">
-                    <h2 className="text-4xl font-semibold capitalize cap">{category}  Essentials</h2>
+                    <h2 className="text-4xl font-semibold capitalize cap">{category} Essentials</h2>
                 </div>
 
                 {/* Carousel */}
@@ -53,7 +63,10 @@ export default function EssentialsRefined({ category }: EssentialsRefinedProps) 
                     <div className="overflow-hidden" ref={emblaRef}>
                         <div className="flex">
                             {filteredProducts.map((product: Product) => (
-                                <div className="flex-[0_0_100%] sm:flex-[0_0_50%] md:flex-[0_0_25%] pl-1" key={product.id}>
+                                <div
+                                    className="flex-[0_0_100%] sm:flex-[0_0_50%] md:flex-[0_0_25%] pl-1"
+                                    key={product.id}
+                                >
                                     <Link
                                         href={`/product/${product.id}`}
                                         className="flex flex-col items-center text-center group cursor-pointer"
