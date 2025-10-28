@@ -111,15 +111,27 @@
 
 
 
-'use client';
 
-import React from 'react';
-import { useCartStore } from '@/lib/useCartStore';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+
+import React, { useState } from "react";
+import { useCartStore } from "@/lib/useCartStore";
+import Image from "next/image";
+import Link from "next/link";
+import { deliveryDetails, DeliveryKey } from "@/lib/deliveryDetails";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, getTotalPrice } = useCartStore();
+
+  const [selectedDelivery, setSelectedDelivery] = useState<DeliveryKey>("insideValley");
+
+  const handleDeliveryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedDelivery(e.target.value as DeliveryKey);
+  };
+
+  const delivery = deliveryDetails[selectedDelivery];
+  const subtotal = getTotalPrice();
+  const total = subtotal + delivery.price;
 
   if (cartItems.length === 0) {
     return (
@@ -137,15 +149,15 @@ const CartPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <h1 className="text-6xl font-bold my-10 !montserrat">Shopping Cart</h1>
 
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* Cart Items */}
         <div className="lg:col-span-2 space-y-6">
           {cartItems.map((item, index) => (
             <div
-              key={`${item.id}-${item.color ?? 'no-color'}-${item.size ?? 'no-size'}-${index}`}
-              className="flex flex-col sm:flex-row items-center sm:items-start gap-6 border-b pb-6"
+              key={`${item.id}-${item.color ?? "no-color"}-${item.size ?? "no-size"}-${index}`}
+              className="flex flex-col sm:flex-row items-center sm:items-start gap-6 border-b border-zinc-300 pb-6"
             >
               <div className="relative w-28 h-36 flex-shrink-0">
                 <Image
@@ -207,55 +219,95 @@ const CartPage = () => {
                 </div>
 
                 {/* Quantity Controls */}
-                <div className="flex items-center gap-3 mt-4">
-                  <button
-                    onClick={() =>
-                      updateQuantity(item.id, item.quantity - 1, item.size, item.color)
-                    }
-                    className="px-3 py-1 border rounded hover:bg-gray-100"
-                  >
-                    -
-                  </button>
-                  <span className="w-6 text-center">{item.quantity}</span>
-                  <button
-                    onClick={() =>
-                      updateQuantity(item.id, item.quantity + 1, item.size, item.color)
-                    }
-                    className="px-3 py-1 border rounded hover:bg-gray-100"
-                  >
-                    +
-                  </button>
+                <div className="flex items-center gap-3 mt-4  ">
+                  <div className="border px-2">
+                    <button
+                      onClick={() =>
+                        updateQuantity(item.id, item.quantity - 1, item.size, item.color)
+                      }
+                      className="px-3 py-1  rounded hover:bg-gray-100 cursor-pointer"
+                    >
+                      -
+                    </button>
+                    <span className="w-6 text-center">{item.quantity}</span>
+                    <button
+                      onClick={() =>
+                        updateQuantity(item.id, item.quantity + 1, item.size, item.color)
+                      }
+                      className="px-3 py-1  rounded hover:bg-gray-100 cursor-pointer"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-
-
         {/* Order Summary */}
-        <div className="lg:col-span-1">
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm sticky top-24">
+        <div className="lg:col-span-1  ">
+          <div className="shadow1 bg-zinc-50 p-6 rounded-lg shadow-sm sticky top-24">
             <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+
             <div className="space-y-2 text-gray-700">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>${getTotalPrice().toFixed(2)}</span>
+                <span>${subtotal.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between">
-                <span>Shipping</span>
-                <span className="text-green-600 font-medium">FREE</span>
+
+              {/* Country */}
+              <div className="mt-4">
+                <label className="text-sm font-medium">Country:</label>
+                <div className="border rounded-md p-2 mt-1 text-center font-medium text-gray-800">
+                  Nepal
+                </div>
               </div>
-              <div>
+
+              {/* Delivery Selection */}
+              <div className="mt-4">
+                <label className="text-sm font-medium">Choose Delivery:</label>
+                <select
+                  value={selectedDelivery}
+                  onChange={handleDeliveryChange}
+                  className="w-full border rounded-md p-2 mt-1 bg-white text-gray-700"
+                >
+                  {Object.entries(deliveryDetails).map(([key, option]) => (
+                    <option key={key} value={key}>
+                      {option.label} – $ {option.price} ({option.time})
+                    </option>
+                  ))}
+                </select>
               </div>
+
+              {/* Delivery Details */}
+              <div className="flex justify-between text-sm mt-3">
+                <span>Delivery Time</span>
+                <span>{delivery.time}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span>Delivery Charge</span>
+                <span>{delivery.price === 0 ? "FREE" : `$ ${delivery.price}`}</span>
+              </div>
+
               <div className="border-t pt-3 mt-3 font-semibold flex justify-between text-lg">
                 <span>Total</span>
-                <span>${getTotalPrice().toFixed(2)}</span>
+                <span>$ {total.toFixed(2)}</span>
               </div>
             </div>
+
             <button className="w-full bg-black text-white py-3 rounded-md mt-6 hover:bg-gray-800 transition-colors">
               Proceed to Checkout
             </button>
+
+            <p className="text-center text-sm mt-4">
+              <a
+                href="/delivery-return-policy"
+                className="text-blue-600 underline hover:text-blue-800"
+              >
+                Delivery & Return Policy
+              </a>
+            </p>
           </div>
         </div>
       </div>

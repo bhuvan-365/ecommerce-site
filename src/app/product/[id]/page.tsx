@@ -43,7 +43,7 @@ export default function ProductPage({ params }: PageProps) {
                 {/* Left Section */}
                 <div className="flex flex-col md:flex-row gap-4 sticky top-24 s h-[90vh]">
                     {/* Thumbnail list */}
-                    <div className="flex md:flex-col gap-3 order-2 md:order-1">
+                    <div className="flex md:flex-col gap-2 order-2 md:order-1">
 
                         {product.images?.map((img, index) => (
                             <img
@@ -59,7 +59,7 @@ export default function ProductPage({ params }: PageProps) {
 
                     {/* Main Image */}
                     <div className="relative w-full order-1 md:order-2">
-                        <div className="w-full h-[85vh]">
+                        <div className="w-full h-[86vh]">
                             <img
                                 src={selectedImage}
                                 alt={product.name}
@@ -313,7 +313,7 @@ export default function ProductPage({ params }: PageProps) {
                     {/* Wishlist + Delivery Info */}
                     <div className="mt-4 text-sm text-gray-700 space-y-2">
                         <p> Free delivery on qualifying orders.</p>
-                        <Link href="/" className="text-blue-600 underline">
+                        <Link href="/delivery-return-policy" className="text-blue-600 underline">
                             View our Delivery & Returns Policy
                         </Link>
                     </div>

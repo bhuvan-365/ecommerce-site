@@ -104,7 +104,7 @@ const WishlistPage = () => {
 
 
             <Link href={`/product/${item.id}`}>
-              <div className="  mt-2 text-md poppins border-[0.5px] border-black text-black text-center py-4 cursor-pointer hover:bg-zinc-600/20 transition-colors">
+              <div className="  mt-2 text-md poppins border-[0.5px] border-black text-black text-center py-4 cursor-pointer hover:bg-zinc-400/20 transition-colors">
                 View
               </div>
             </Link>
