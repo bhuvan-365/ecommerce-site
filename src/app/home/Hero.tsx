@@ -138,7 +138,7 @@ const Hero: React.FC = () => {
                             EComx <br /> Presents
                         </h1>
                         <div className="pl-[30%] sm:pl-[40%] mt-20 p-3">
-                            <p className="text-xl sm:text-6xl lg:text-[3.5rem] leading-tight ">
+                            <p className="text-xl sm:text-6xl lg:text-[4rem] leading-tight ">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 At EcomX, we make fashion for everyone — combining quality, comfort, and affordability. Our pieces reflect personality and story, not fleeting trends. We focus on timeless style that lasts, making fashion accessible, sustainable, and real. Style with substance, for real lives.</p>
                         </div>

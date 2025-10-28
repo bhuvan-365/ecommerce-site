@@ -2,20 +2,20 @@
 import Link from "next/link";
 import React from "react";
 
-// ✅ Step 1: Define prop type
+// Define prop type
 interface ShopNowSectionProps {
     category: string;
 }
 
-// ✅ Step 2: Use the prop type in the component
+//  Use the prop type in the component
 const ShopNowSection: React.FC<ShopNowSectionProps> = ({ category }) => {
     return (
-        <section className="w-full min-h-[70vh] flex flex-col items-center justify-center bg-white text-center px-4">
+        <section className="mt-12 w-full min-h-[70vh] flex flex-col items-center justify-center bg-white text-center px-4">
             {/* Logo */}
             <img
-                src="/logo.svg"
+                src="/logo2.svg"
                 alt="Logo EcomX"
-                className="w-12 h-12 mb-4"
+                className="w-24 h-24 mb-4"
             />
 
             {/* Heading */}

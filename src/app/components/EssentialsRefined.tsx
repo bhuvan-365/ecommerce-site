@@ -46,7 +46,7 @@ export default function EssentialsRefined({ category }: EssentialsRefinedProps) 
 
     return (
         <div className="min-h-screen mt-1 bg-white flex flex-col items-center justify-center px-4 py-10 overflow-x-hidden">
-            <div className="max-w-7xl w-full">
+            <div className="max-w-[94vw] w-full ">
                 <div className="flex justify-center items-center mb-5 noto">
                     <h2 className="text-4xl font-semibold capitalize cap">{category} Essentials</h2>
                 </div>

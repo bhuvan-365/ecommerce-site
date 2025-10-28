@@ -164,6 +164,7 @@ const Navbar = () => {
                 {/* Icons */}
                 <div className="hidden md:flex space-x-4 items-center">
                     <FiSearch className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
+
                     <Link href="/wishlist">
                         <FiHeart className="w-5 h-5 cursor-pointer hover:text-yellow-500" />
                     </Link>
