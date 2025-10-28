@@ -86,7 +86,7 @@ export const products: Product[] = [
     // ===== WOMEN =====
     {
         id: 6,
-        name: "ASOS DESIGN cropped",
+        name: "ASOS DESIGN cropped11",
         price: "$62.00",
         oldPrice: "$124.00",
         discount: "50% OFF",
@@ -96,7 +96,7 @@ export const products: Product[] = [
         category: "women",
         tabs: ["latest"],
         sizes: ["XS", "S", "M", "L"],
-        colorAvai: ["Black", "Red", "White", "Yellow"],
+            colorAvai: ["Black", "Red", "White", "Yellow"],
         images: [
             "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
             "/productImg/creamshirt.webp",
@@ -111,6 +111,9 @@ export const products: Product[] = [
         id: 7,
         name: "ASOS DESIGN ribbed",
         price: "$37.00",
+        oldPrice: "$124.00",
+        discount: "80% OFF",
+
         image: "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
         hoverImage: "/productImg/sweatshirt.webp",
         description: "Ribbed knit top perfect for layering or styling solo.",

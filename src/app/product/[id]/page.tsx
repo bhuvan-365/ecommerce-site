@@ -18,6 +18,8 @@ export default function ProductPage({ params }: PageProps) {
     const [selectedSize, setSelectedSize] = useState("");
     const [sizeOpen, setSizeOpen] = useState(false);
     const [detailOpen, setDetailOpen] = useState(false);
+    const [selectedColor, setSelectedColor] = useState("");
+    const [quantity, setQuantity] = useState(1);
 
     if (!product) {
         return (
@@ -119,12 +121,86 @@ export default function ProductPage({ params }: PageProps) {
                     <div className="mt-3 flex flex-col justify-start items-start">
                         <span className="font-semibold mr-2 ">COLOUR:</span>
                         <div className="py-2 ">
-                            {product.colorAvai?.map((Col, idx) => (
-                                <span key={idx} className="bg-black/50 hover:bg-black rounded text-white px-4 py-2 text-sm mx-1">{Col}</span>
-                            ))}
+
+                            {product.colorAvai && (
+                                <div className="mt-4">
+                                    <h3 className="font-semibold">Select Color:</h3>
+                                    <div className="flex gap-1.5 mt-2">
+                                        {product.colorAvai.map((col, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => setSelectedColor(col)}
+                                                className={`bg-black/50 hover:bg-black rounded text-white px-4 py-2 text-sm mx-1
+                                                    
+                                                    ${selectedColor === col
+                                                        ? "border-black bg-black text-white"
+                                                        : " bg-zinc-400"
+                                                    }`}
+
+
+                                            >
+                                                {col}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
                         </div>
 
                     </div>
+
+
+
+
+
+                    {/* Colour */}
+                    {/* <div className="mt-3 flex flex-col justify-start items-start">
+                        <span className="font-semibold mr-2">COLOUR:</span>
+
+                        {product.colorAvai && (
+                            <div className="mt-3">
+                                <div className="flex gap-2 mt-2">
+                                    {product.colorAvai.map((col, idx) => {
+                                        const isSelected = selectedColor === col;
+                                        const lowerColor = col.toLowerCase();
+
+                                        return (
+                                            <button
+                                                key={idx}
+                                                onClick={() => setSelectedColor(col)}
+                                                title={col}
+                                                className={`w-5 h-5 border-1 transition-all duration-200 ${isSelected ? " border-black" : "border-gray-300"
+                                                    }`}
+                                                style={{
+                                                    backgroundColor: lowerColor,
+                                                }}
+                                            ></button>
+                                        );
+                                    })}
+                                </div>
+
+                                {selectedColor && (
+                                    <div
+                                        className="mt-3 px-4 py-1 border border-zinc-600 text-sm font-semibold inline-block transition-all duration-300"
+                                        style={{
+                                            backgroundColor: selectedColor.toLowerCase(),
+                                            color:
+                                                selectedColor.toLowerCase() === "black"
+                                                    ? "white"
+                                                    : selectedColor.toLowerCase() === "white"
+                                                        ? "black"
+                                                        : "white",
+                                            borderColor: "#000",
+                                        }}
+                                    >
+                                        {selectedColor}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div> */}
+
 
                     <div className="py-8 pt-10 flex justify-start items-center gap-3">
                         <p className="text-3xl font-bold text-red-500">
@@ -143,7 +219,7 @@ export default function ProductPage({ params }: PageProps) {
 
 
                     {/* Size Dropdown */}
-                    {product.sizes && (
+                    {/* {product.sizes && (
                         <div className="mt-2">
                             <label htmlFor="size" className="font-semibold mb-2 flex justify-between items-center">
                                 <span>
@@ -170,12 +246,72 @@ export default function ProductPage({ params }: PageProps) {
 
 
                         </div>
+                    )} */}
+
+                    {product.sizes && (
+                        <div className="mt-4">
+
+                            <label htmlFor="size" className="font-semibold mb-2 flex justify-between items-center">
+                                <span>
+                                    SELECT SIZE:
+                                </span>
+                                <div>
+                                    <p className="text-sm text-blue-600 mt-1 cursor-pointer">
+                                        Size Guide
+                                    </p></div>
+
+                            </label>
+                            <div className="flex gap-2 mt-2">
+                                {product.sizes.map((size, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setSelectedSize(size)}
+                                        className={`p-2 px-7 py-2 border-[0.5px] border-zinc-500/50 rounded-4xl ${selectedSize === size
+                                            ? "border-black bg-black text-white"
+                                            : "border-gray-400"
+                                            }`}
+                                    >
+                                        {size}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     )}
 
-                    {/* Add to Cart Button */}
-                    <div className="pt-8">
-                        <CartButton product={product} />
+
+                    <div className="flex justify-center items-center border mt-4">
+                        {/* Quantity Selector */}
+                        <div className=" flex items-center gap-3 w-[30%]">
+                            <button
+                                onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                                className="border px-3 py-1 rounded"
+                            >
+                                -
+                            </button>
+                            <span>{quantity}</span>
+                            <button
+                                onClick={() => setQuantity(q => q + 1)}
+                                className="border px-3 py-1 rounded"
+                            >
+                                +
+                            </button>
+                        </div>
+
+                        {/* Add to Cart Button */}
+                        <div className=" w-[70%]">
+                            {/* <CartButton product={product} /> */}
+
+                            <CartButton
+                                product={product}
+                                size={selectedSize}
+                                color={selectedColor}
+                                quantity={quantity}
+                                disabled={!selectedSize || !selectedColor}
+                            />
+
+                        </div>
                     </div>
+
 
 
 

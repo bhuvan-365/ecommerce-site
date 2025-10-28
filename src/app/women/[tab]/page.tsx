@@ -103,14 +103,36 @@ const WomenTabPage = () => {
 
                         <div className="px-4">
                             <p className="mt-2 text-lg text-zinc-800">{item.name}</p>
-                            <div className="flex justify-start items-start gap-3">
-                                <p className=" font-semibold text-lg text-red-500 ">{item.price}</p>
-                                {item.oldPrice && (
-                                    <p className=" font-semibold text-lg line-through ">{item.oldPrice}</p>
-                                )}
+
+                            <div className="flex justify-between items-center">
+                                <div className="flex justify-start items-start gap-3">
+                                    <p className=" font-semibold text-lg text-red-500 ">{item.price}</p>
+                                    {item.oldPrice && (
+                                        <p className=" font-semibold text-md text-zinc-500 line-through ">{item.oldPrice}</p>
+                                    )}
+                                </div>
 
 
+                                <div>
+                                    {item.colorAvai && item.colorAvai.length > 0 && (
+                                        <div className="flex items-center gap-1">
+                                            {item.colorAvai.slice(0, 3).map((color, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="w-3 h-3 border border-zinc-400"
+                                                    style={{ backgroundColor: color.toLowerCase() }}
+                                                ></div>
+                                            ))}
+                                            {item.colorAvai.length > 3 && (
+                                                <span className="text-sm text-gray-600">
+                                                    +{item.colorAvai.length - 3}
+                                                </span>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
+
 
                         </div>
                     </Link>

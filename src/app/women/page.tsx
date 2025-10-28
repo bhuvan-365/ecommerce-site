@@ -8,10 +8,12 @@ import MoreProduct from '../components/MoreProduct'
 import Breaker from '../components/Breaker'
 import ShopNowSection from '../components/ShopNow'
 import Tabs from '../components/TabLinks';
+import LenisProvider from '../components/LenisProvider'
 
 const women = () => {
   return (
     <>
+<LenisProvider>
       <Banner src="https://www.asos-video.com/video/upload/f_auto,q_auto/HOMEPAGE_DESKTOP_v3_phvqkt.mp4" />
       <Tabs category="women" />
       <EssentialsRefined category="women" />
@@ -23,6 +25,7 @@ const women = () => {
 
       <MoreProduct />
       <ShopNowSection category='women' />
+      </LenisProvider>
     </>
   )
 }

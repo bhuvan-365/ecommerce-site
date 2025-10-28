@@ -99,14 +99,14 @@ const Navbar = () => {
         ${showNavbar ? "translate-y-0" : "-translate-y-full"}
         ${dropdownOpen || !showNavbar || isScrolled
                     ? "bg-white !text-zinc-800"
-                    : "bg-transparent text-white"}
+                    : "bg-transparent text-black"}
       `}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-6 flex justify-between items-center h-16">
                 {/* Logo */}
                 <Link href="/">
                     <div className="flex justify-center items-center gap-2">
-                        <img src="/logo.svg" alt="Logo" className="h-8 w-auto" />
+                        <img src="/logo2.svg" alt="Logo" className="h-8 w-auto" />
                         <div className="text-2xl font-bold">EcomX</div>
                     </div>
                 </Link>
