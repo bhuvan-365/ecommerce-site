@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import LenisProvider from "./components/LenisProvider";
 
 // ✅ Fonts setup
 const geistSans = Geist({
@@ -34,8 +35,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
+<LenisProvider>
 
         {children}
+</LenisProvider>
         <Footer />
       </body>
     </html>
