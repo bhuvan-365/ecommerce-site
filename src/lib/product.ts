@@ -14,6 +14,10 @@ export interface Product {
     sizes: string[];
     images?: string[];
     colorAvai: string[]; // valid CSS color names
+    rating?: number;
+    ratingCount?: number;
+    soldCount?: number;
+
 }
 
 export const products: Product[] = [
@@ -32,6 +36,10 @@ export const products: Product[] = [
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["black", "navy", "gray", "olive"],
         images: ["/mens/men1.avif", "/mens/men2.avif", "/productImg/creamshirt.webp"],
+        rating: 4.8,
+        ratingCount: 234,
+        soldCount: 1200,
+
     },
     {
         id: 2,
@@ -46,6 +54,10 @@ export const products: Product[] = [
         tabs: ["weekday"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["beige", "olive", "tan", "brown"],
+        rating: 4.3,
+        ratingCount: 24,
+        soldCount: 2000,
+
     },
     {
         id: 3,
@@ -60,6 +72,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["beige", "olive", "navy", "white"],
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
+
     },
     {
         id: 4,
@@ -74,6 +90,7 @@ export const products: Product[] = [
         tabs: ["collection"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["charcoal", "camel", "brown", "black"],
+
     },
     {
         id: 5,
@@ -86,6 +103,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["white", "skyblue", "lightgray", "tan"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
 
     // ===================== WOMEN =====================
@@ -102,6 +123,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         sizes: ["XS", "S", "M", "L"],
         colorAvai: ["blue", "white", "black", "gray"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 12,
@@ -116,6 +141,10 @@ export const products: Product[] = [
         tabs: ["collection"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["pink", "lavender", "cream", "peach"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 13,
@@ -130,6 +159,10 @@ export const products: Product[] = [
         tabs: ["weekday"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["beige", "black", "white", "gray"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 14,
@@ -144,6 +177,10 @@ export const products: Product[] = [
         tabs: ["streetwear"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["cream", "olive", "black", "navy"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 15,
@@ -158,6 +195,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["beige", "brown", "gray", "white"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
 
     // ======= 5 NEW WOMEN LATEST ITEMS =======
@@ -174,6 +215,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["beige", "black", "olive", "tan"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 202,
@@ -188,6 +233,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         sizes: ["XS", "S", "M", "L"],
         colorAvai: ["white", "lightblue", "pink", "lavender"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 203,
@@ -202,6 +251,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["black", "gray", "red", "beige"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 204,
@@ -216,6 +269,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["navy", "beige", "charcoal", "black"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 205,
@@ -230,6 +287,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["lightblue", "blue", "black", "gray"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
 
     // ===================== KIDS =====================
@@ -246,6 +307,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["blue", "red", "green", "yellow"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 22,
@@ -258,6 +323,10 @@ export const products: Product[] = [
         tabs: ["streetwear"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["white", "yellow", "orange", "blue"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 23,
@@ -272,6 +341,10 @@ export const products: Product[] = [
         tabs: ["collection"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["blue", "lightblue", "gray", "navy"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 24,
@@ -284,6 +357,10 @@ export const products: Product[] = [
         tabs: ["weekday"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["pink", "mintgreen", "white", "yellow"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 25,
@@ -298,6 +375,10 @@ export const products: Product[] = [
         tabs: ["streetwear"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["gray", "navy", "blue", "black"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 101,
@@ -312,6 +393,10 @@ export const products: Product[] = [
         tabs: ["latest"],
         colorAvai: ["White", "Light Green"],
         sizes: ["S", "M", "L", "XL"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 102,
@@ -326,6 +411,10 @@ export const products: Product[] = [
         tabs: ["best-seller"],
         colorAvai: ["Indigo", "Black"],
         sizes: ["S", "M", "L", "XL"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 103,
@@ -340,6 +429,10 @@ export const products: Product[] = [
         tabs: ["summer"],
         colorAvai: ["Khaki", "Navy"],
         sizes: ["S", "M", "L", "XL"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 104,
@@ -354,6 +447,10 @@ export const products: Product[] = [
         tabs: ["cozy"],
         colorAvai: ["Grey", "Olive"],
         sizes: ["S", "M", "L", "XL"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
     {
         id: 105,
@@ -368,6 +465,10 @@ export const products: Product[] = [
         tabs: ["footwear"],
         colorAvai: ["White", "Black"],
         sizes: ["S", "M", "L", "XL"],
+
+        rating: 3.3,
+        ratingCount: 24,
+        soldCount: 2300,
     },
 
 ];

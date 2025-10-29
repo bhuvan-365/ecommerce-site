@@ -66,27 +66,37 @@ export default function ProductPage({ params }: PageProps) {
                                 className="w-full h-full object-cover object-center rounded-md"
                             />
                         </div>
-                        {/* Arrows */}
-                        <button
-                            onClick={() => {
-                                const i = product.images?.indexOf(selectedImage) ?? 0;
-                                if (i > 0)
-                                    setSelectedImage(product.images![i - 1]);
-                            }}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/20 shadow-md p-2"
-                        >
-                            ❮
-                        </button>
-                        <button
-                            onClick={() => {
-                                const i = product.images?.indexOf(selectedImage) ?? 0;
-                                if (product.images && i < product.images.length - 1)
-                                    setSelectedImage(product.images[i + 1]);
-                            }}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/20 shadow-md p-2"
-                        >
-                            ❯
-                        </button>
+
+                        {/* Arrows — only show if there are multiple images */}
+                        {Array.isArray(product.images) && product.images.length > 1 && (
+                            <>
+                                <button
+                                    onClick={() => {
+                                        const i = product.images?.indexOf(selectedImage) ?? 0;
+                                        if (i > 0 && product.images) {
+                                            setSelectedImage(product.images[i - 1]);
+                                        }
+                                    }}
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/20 shadow-md p-2"
+                                >
+                                    ❮
+                                </button>
+
+                                <button
+                                    onClick={() => {
+                                        const i = product.images?.indexOf(selectedImage) ?? 0;
+                                        if (product.images && i < product.images.length - 1) {
+                                            setSelectedImage(product.images[i + 1]);
+                                        }
+                                    }}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/20 shadow-md p-2"
+                                >
+                                    ❯
+                                </button>
+                            </>
+                        )}
+
+
                     </div>
                 </div>
 
@@ -102,9 +112,17 @@ export default function ProductPage({ params }: PageProps) {
                     <div className=" flex justify-between items-center py-2">
                         <div className=" font-semibold flex justify-start items-center gap-1 text-lg text-black/70">
 
-                            <div className="flex justify-center items-center"><img src="/svgs/rating.svg" alt="ecomXRate" />  <span>4.8</span> </div>
-                            <div>(234)</div>|
-                            <div>1.2k sold</div>
+                            <div className="flex justify-start items-center gap-1 text-lg text-black/70">
+                                <div className="flex justify-center items-center">
+                                    <img src="/svgs/rating.svg" alt="rating" className="w-5 h-5" />
+                                    <span>{product.rating?.toFixed(1) ?? "N/A"}</span>
+                                </div>
+                                <div>({product.ratingCount})</div> |
+                                <div>{product.soldCount ?
+                                    (product.soldCount >= 1000 ? (product.soldCount / 1000).toFixed(1) + "k" : product.soldCount)
+                                    : "0"} sold</div>
+                            </div>
+
 
                         </div>
                         <div className="flex justify-start items-center gap-2">
@@ -119,12 +137,12 @@ export default function ProductPage({ params }: PageProps) {
 
                     {/* Colour */}
                     <div className="mt-3 flex flex-col justify-start items-start">
-                        <span className="font-semibold mr-2 ">COLOUR:</span>
+
                         <div className="py-2 ">
 
                             {product.colorAvai && (
                                 <div className="mt-4">
-                                    <h3 className="font-semibold">Select Color:</h3>
+                                    <h3 className="font-semibold uppercase">Select Color:</h3>
                                     <div className="flex gap-1.5 mt-2">
                                         {product.colorAvai.map((col, idx) => (
                                             <button
@@ -149,52 +167,7 @@ export default function ProductPage({ params }: PageProps) {
                         </div>
 
                     </div>
-                    {/* Colour */}
-                    {/* <div className="mt-3 flex flex-col justify-start items-start">
-                        <span className="font-semibold mr-2">COLOUR:</span>
 
-                        {product.colorAvai && (
-                            <div className="mt-3">
-                                <div className="flex gap-2 mt-2">
-                                    {product.colorAvai.map((col, idx) => {
-                                        const isSelected = selectedColor === col;
-                                        const lowerColor = col.toLowerCase();
-
-                                        return (
-                                            <button
-                                                key={idx}
-                                                onClick={() => setSelectedColor(col)}
-                                                title={col}
-                                                className={`w-5 h-5 border-1 transition-all duration-200 ${isSelected ? " border-black" : "border-gray-300"
-                                                    }`}
-                                                style={{
-                                                    backgroundColor: lowerColor,
-                                                }}
-                                            ></button>
-                                        );
-                                    })}
-                                </div>
-
-                                {selectedColor && (
-                                    <div
-                                        className="mt-3 px-4 py-1 border border-zinc-600 text-sm font-semibold inline-block transition-all duration-300"
-                                        style={{
-                                            backgroundColor: selectedColor.toLowerCase(),
-                                            color:
-                                                selectedColor.toLowerCase() === "black"
-                                                    ? "white"
-                                                    : selectedColor.toLowerCase() === "white"
-                                                        ? "black"
-                                                        : "white",
-                                            borderColor: "#000",
-                                        }}
-                                    >
-                                        {selectedColor}
-                                    </div>
-                                )}
-                            </div>
-                        )}
-                    </div> */}
 
                     <div className="py-8 pt-10 flex justify-start items-center gap-3">
                         <p className="text-3xl font-bold text-red-500">
@@ -212,35 +185,6 @@ export default function ProductPage({ params }: PageProps) {
                     </div>
 
 
-                    {/* Size Dropdown */}
-                    {/* {product.sizes && (
-                        <div className="mt-2">
-                            <label htmlFor="size" className="font-semibold mb-2 flex justify-between items-center">
-                                <span>
-                                    SELECT SIZE:
-                                </span>
-                                <div>
-                                    <p className="text-sm text-blue-600 mt-1 cursor-pointer">
-                                        Size Guide
-                                    </p></div>
-
-                            </label>
-
-                            <div>
-                                <div className="flex flex-row s justify-start items-start gap-2">
-
-                                    {product.sizes.map((size, idx) => (
-                                        <div key={idx} className="p-2 px-7 py-2 border-[0.5px] border-zinc-500/50 rounded-4xl">
-                                            {size}
-                                        </div>
-
-                                    ))}
-                                </div>
-                            </div>
-
-
-                        </div>
-                    )} */}
 
                     {product.sizes && (
                         <div className="mt-4">
@@ -273,22 +217,24 @@ export default function ProductPage({ params }: PageProps) {
                     )}
 
 
-                    <div className="flex justify-center items-center  mt-4">
+                    <div className="flex justify-center items-center  my-12">
                         {/* Quantity Selector */}
-                        <div className=" flex items-center gap-3 w-[30%]">
-                            <button
-                                onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                                className="border px-3 py-1 rounded"
-                            >
-                                -
-                            </button>
-                            <span>{quantity}</span>
-                            <button
-                                onClick={() => setQuantity(q => q + 1)}
-                                className="border px-3 py-1 rounded"
-                            >
-                                +
-                            </button>
+                        <div className="  w-[30%]  ">
+                            <div className="flex items-center justify-between w-fit gap-3 border mx-auto">
+                                <button
+                                    onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                                    className=" px-3 py-1 rounded"
+                                >
+                                    -
+                                </button>
+                                <span>{quantity}</span>
+                                <button
+                                    onClick={() => setQuantity(q => q + 1)}
+                                    className=" px-3 py-1 rounded"
+                                >
+                                    +
+                                </button>
+                            </div>
                         </div>
 
                         {/* Add to Cart Button */}
