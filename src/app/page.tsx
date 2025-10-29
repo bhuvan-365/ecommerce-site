@@ -4,6 +4,7 @@ import HeroSec from './home/Hero'
 import Latest from './home/LatestArrivals'
 import Trending from './home/Trending'
 import Brandlogo from './home/Brandlogo'
+import Hotpick from './home/Hotpick'
 
 
 const page = () => {
@@ -13,7 +14,8 @@ const page = () => {
       <HeroSec />
       {/* <Trendings /> */}
       <Trending />
-      <Latest />
+      {/* <Latest /> */}
+      {/* <Hotpick /> */}
       <Brandlogo />
 
 
