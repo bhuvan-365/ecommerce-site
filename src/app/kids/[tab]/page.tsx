@@ -37,7 +37,11 @@ const KidsTabPage = () => {
     return (
         <section className="py-8">
             {/* Section Header */}
-            <div className="flex justify-center items-center flex-col border-t border-b border-zinc-500 py-10 mt-12">
+            <div className="relative flex justify-center items-center flex-col border-t border-b border-zinc-500 py-10 mt-12">
+                <Link href={`/kids`} className="absolute top-2 left-3 flex items-center gap-2 mb-4 text-zinc-700 hover:text-black transition-colors">
+                    <span className="text-lg font-semibold">Go back</span>
+                    <img className="h-6 w-6" src="/svgs/goback.svg" alt="ecomx" />
+                </Link>
                 <div className="text-2xl font-thin capitalize">kids / {tab}</div>
                 <div className="text-4xl pt-4">SHOP</div>
             </div>

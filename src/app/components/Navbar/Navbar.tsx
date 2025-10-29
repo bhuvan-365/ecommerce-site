@@ -44,7 +44,7 @@ const Navbar = () => {
         ${!showNavbar || isScrolled ? "bg-white !text-zinc-800" : "bg-transparent text-black"}
       `}
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-6 flex justify-between items-center h-16">
+            <div className=" px-2  lg:px-5 flex justify-between items-center h-16">
                 {/* Logo */}
                 <Link href="/">
                     <div className="flex justify-center items-center gap-2">

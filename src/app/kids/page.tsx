@@ -16,7 +16,7 @@ const women = () => {
       <Breaker
         title="Beyond Basic Wears"
         description="Shop high-quality classic tees in a range of colors, fits, and fabrics."
-        image="/womens/womens.jpg"
+        image="/kids/kidbanner.avif"
       />
 
       <MoreProduct />

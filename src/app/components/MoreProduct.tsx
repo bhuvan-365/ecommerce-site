@@ -19,7 +19,7 @@ const MoreProduct = () => {
                         <div className='flex justify-between items-center px-5 py-1 text-lg'>
 
                             <div className="name capitalize tracking-wide">CHECK SHIRT</div>
-                            <Link href='#' className='underline text-black'> SHOP NOW</Link>
+                            <Link href='/product/101' className='underline text-black'> SHOP NOW</Link>
                         </div>
                     </div>
                     <div className="relative left h-[100%] w-[50%]">
@@ -34,7 +34,7 @@ const MoreProduct = () => {
                         <div className='flex justify-between items-center px-5 py-1 text-lg'>
 
                             <div className="name capitalize tracking-wide">DENIM PANTS</div>
-                            <Link href='#' className='underline text-black'> SHOP NOW</Link>
+                            <Link href='/product/101' className='underline text-black'> SHOP NOW</Link>
                         </div>
                     </div>
                 </div>

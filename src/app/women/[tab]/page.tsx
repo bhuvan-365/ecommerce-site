@@ -43,7 +43,13 @@ const WomenTabPage = () => {
     return (
         <section className="py-8">
 
-            <div className="flex justify-center items-center flex-col border-t border-b border-zinc-500 py-10 mt-12">
+            <div className="relative flex justify-center items-center flex-col border-t border-b border-zinc-500 py-10 mt-12">
+
+                <Link href={`/women`} className="absolute top-2 left-3 flex items-center gap-2 mb-4 text-zinc-700 hover:text-black transition-colors">
+                    <span className="text-lg font-semibold">Go back</span>
+                    <img className="h-6 w-6" src="/svgs/goback.svg" alt="ecomx" />
+                </Link>
+
                 <div className="text-2xl font-thin capitalize">Women / {tab} </div>
                 <div className="text-4xl pt-4">SHOP</div>
             </div>
@@ -60,25 +66,6 @@ const WomenTabPage = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 px-2">
 
                 {filtered.map((item) => (
-                    // <div key={item.id} className="border rounded overflow-hidden">
-                    //     <div className="relative w-full h-64">
-                    //         <img
-                    //             src={item.image}
-                    //             alt={item.name}
-                    //             className="w-full h-full object-cover hover:opacity-90 transition"
-                    //         />
-                    //     </div>
-                    //     <div className="p-3">
-                    //         <div className="font-medium text-sm truncate">{item.name}</div>
-                    //         <div className="text-xs text-gray-500">{item.description}</div>
-                    //         <div className="font-semibold mt-2">{item.price}</div>
-                    //     </div>
-                    // </div>
-
-
-
-
-
                     <Link
                         key={item.id}
                         href={`/product/${item.id}`}

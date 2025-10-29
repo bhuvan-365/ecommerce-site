@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { products } from "@/lib/product";
 import Link from "next/link";
 
@@ -9,14 +9,21 @@ function ProductContent() {
     const searchParams = useSearchParams();
     const category = searchParams.get("category");
 
+
     const filteredProducts = category
         ? products.filter((p) => p.category === category)
         : products;
 
     return (
         <section className="py-8">
+
+
             {/* Header */}
-            <div className="flex justify-center items-center flex-col border-t border-b border-zinc-500 py-10 mt-12">
+            <div className="relavtive flex justify-center items-center flex-col border-t border-b border-zinc-500 py-10 mt-12">
+                <Link href={`${category}`} className="absolute top-22 left-3 flex items-center gap-2 mb-4 text-zinc-700 hover:text-black transition-colors">
+                    <span className="text-lg font-semibold">Go back</span>
+                    <img className="h-6 w-6" src="/svgs/goback.svg" alt="ecomx" />
+                </Link>
                 <div className="text-2xl font-thin capitalize">
                     {category ? `${category} Collection` : "All Products"}
                 </div>
