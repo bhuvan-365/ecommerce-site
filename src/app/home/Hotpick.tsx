@@ -18,7 +18,7 @@ export default function HorizontalScrollPage() {
     const totalWidth = hotpicks.length * 50 - 100; // since each card is 50vw wide
 
     // Translate horizontally based on scroll progress
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${totalWidth}%`]);
+    const x = useTransform(scrollYProgress, [0, 2.49], ["0%", `-${totalWidth}%`]);
 
     return (
         <>
@@ -30,68 +30,70 @@ export default function HorizontalScrollPage() {
             </div>
 
             {/* SECTION: Pin + scroll area */}
-            <section
-                ref={sectionRef}
-                className="relative w-full h-[500vh] bg-gray-50 overflow-hidden"
-            >
-                {/* Sticky container that stays pinned while scrolling */}
-                <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-                    {/* Horizontal motion */}
-                    <motion.div
-                        style={{ x }}
-                        className="flex h-full will-change-transform"
-                    >
-                        {hotpicks.map((p: Product) => (
-                            <div
-                                key={p.id}
-                                className="w-[50vw] h-screen flex-shrink-0 flex items-center justify-center pl-1"
-                            >
-                                <div className="cursor-default relative w-full h-[100%] bg-white shadow-2xl overflow-hidden flex flex-col">
-                                    {/* Image */}
-                                    <div className="relative w-full h-[95%] flex items-center justify-center bg-gray-100">
-                                        <img
-                                            src={p.image}
-                                            alt={p.name}
-                                            className="w-full h-full object-cover transition-all duration-300 ease-in-out"
-                                        />
+            <div className="">
+                <section
+                    ref={sectionRef}
+                    className="relative w-full h-[500vh]  bg-gray-50 "
+                >
+                    {/* Sticky container that stays pinned while scrolling */}
+                    <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+                        {/* Horizontal motion */}
+                        <motion.div
+                            style={{ x }}
+                            className="flex h-full will-change-transform"
+                        >
+                            {hotpicks.map((p: Product) => (
+                                <div
+                                    key={p.id}
+                                    className="w-[50vw] h-screen flex-shrink-0 flex items-center justify-center pl-1"
+                                >
+                                    <div className="cursor-default relative w-full h-[100%] bg-white shadow-2xl overflow-hidden flex flex-col">
+                                        {/* Image */}
+                                        <div className="relative w-full h-[95%] flex items-center justify-center bg-gray-100">
+                                            <img
+                                                src={p.image}
+                                                alt={p.name}
+                                                className="w-full h-full object-cover transition-all duration-300 ease-in-out"
+                                            />
 
-                                        <div className="absolute bottom-[30%] right-[10%] flex justify-center items-center gap-2.5 w-fit h-5">
-                                            <div className="h-5 w-5 border flex justify-center items-center">
-                                                <div className="h-2 w-2 bg-white border"></div>
-                                            </div>
-                                            <div className="h-5 w-fit bg-zinc-300 flex justify-center items-center px-4">
-                                                {p.price}
+                                            <div className="absolute bottom-[30%] right-[10%] flex justify-center items-center gap-2.5 w-fit h-5">
+                                                <div className="h-5 w-5 border flex justify-center items-center">
+                                                    <div className="h-2 w-2 bg-white border"></div>
+                                                </div>
+                                                <div className="h-5 w-fit bg-zinc-300 flex justify-center items-center px-4">
+                                                    {p.price}
+                                                </div>
                                             </div>
                                         </div>
+
+                                        {/* Bottom details */}
+                                        <Link
+                                            href={`/product/${p.id}`}
+                                            className="w-full h-[5%] flex flex-col justify-between cursor-pointer"
+                                        >
+                                            <div className="flex justify-between items-center px-5 py-1 text-lg">
+                                                <div className="text-xl capitalize tracking-wide font-semibold">
+                                                    {p.name}
+                                                </div>
+                                                <div className="underline text-blue-700">SHOP NOW</div>
+                                            </div>
+                                        </Link>
+
+                                        {/* Discount badge */}
+                                        {p.discount && (
+                                            <div className="absolute top-4 right-4">
+                                                <div className="px-3 py-1 rounded-full bg-white/90 text-sm font-semibold shadow">
+                                                    {p.discount}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-
-                                    {/* Bottom details */}
-                                    <Link
-                                        href={`/product/${p.id}`}
-                                        className="w-full h-[5%] flex flex-col justify-between cursor-pointer"
-                                    >
-                                        <div className="flex justify-between items-center px-5 py-1 text-lg">
-                                            <div className="text-xl capitalize tracking-wide font-semibold">
-                                                {p.name}
-                                            </div>
-                                            <div className="underline text-blue-700">SHOP NOW</div>
-                                        </div>
-                                    </Link>
-
-                                    {/* Discount badge */}
-                                    {p.discount && (
-                                        <div className="absolute top-4 right-4">
-                                            <div className="px-3 py-1 rounded-full bg-white/90 text-sm font-semibold shadow">
-                                                {p.discount}
-                                            </div>
-                                        </div>
-                                    )}
                                 </div>
-                            </div>
-                        ))}
-                    </motion.div>
-                </div>
-            </section>
+                            ))}
+                        </motion.div>
+                    </div>
+                </section>
+            </div>
         </>
     );
 }
