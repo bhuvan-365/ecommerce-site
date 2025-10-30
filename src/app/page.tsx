@@ -5,6 +5,7 @@ import Latest from './home/LatestArrivals'
 import Trending from './home/Trending'
 import Brandlogo from './home/Brandlogo'
 import Hotpick from './home/Hotpick'
+import ShopNowSection from './components/ShopNow'
 
 
 const page = () => {
@@ -15,7 +16,8 @@ const page = () => {
       {/* <Trendings /> */}
       <Trending />
       {/* <Latest /> */}
-      {/* <Hotpick /> */}
+      <Hotpick />
+      <ShopNowSection category={["men", "women", "kids"]} />
       <Brandlogo />
 
 

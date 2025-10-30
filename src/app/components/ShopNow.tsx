@@ -4,11 +4,15 @@ import React from "react";
 
 // Define prop type
 interface ShopNowSectionProps {
-    category: string;
+    category: string | string[];
 }
 
 //  Use the prop type in the component
 const ShopNowSection: React.FC<ShopNowSectionProps> = ({ category }) => {
+
+    // Normalize into an array
+    const categories = Array.isArray(category) ? category : [category];
+
     return (
         <section className="mt-12 w-full min-h-[70vh] flex flex-col items-center justify-center bg-white text-center px-4">
             {/* Logo */}

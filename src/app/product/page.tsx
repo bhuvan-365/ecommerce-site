@@ -7,26 +7,34 @@ import Link from "next/link";
 
 function ProductContent() {
     const searchParams = useSearchParams();
-    const category = searchParams.get("category");
+    const categoryParam = searchParams.get("category");
 
+    // 🧠 Handle single, multiple, or no categories
+    const categories = categoryParam
+        ? categoryParam.split(",").map((c) => c.trim().toLowerCase())
+        : [];
 
-    const filteredProducts = category
-        ? products.filter((p) => p.category === category)
-        : products;
-
+    // 🧮 Filter logic: show all if no category, else match any
+    const filteredProducts =
+        categories.length > 0
+            ? products.filter((p) => categories.includes(p.category.toLowerCase()))
+            : products;
     return (
         <section className="py-8">
 
 
             {/* Header */}
             <div className="relavtive flex justify-center items-center flex-col border-t border-b border-zinc-500 py-10 mt-12">
-                <Link href={`${category}`} className="absolute top-22 left-3 flex items-center gap-2 mb-4 text-zinc-700 hover:text-black transition-colors">
+                <Link
+                    href={categories.length > 1 ? "/" : `/product?category=${categories[0]}`}
+                    className="absolute top-22 left-3 flex items-center gap-2 mb-4 text-zinc-700 hover:text-black transition-colors">
                     <span className="text-lg font-semibold">Go back</span>
                     <img className="h-6 w-6" src="/svgs/goback.svg" alt="ecomx" />
                 </Link>
                 <div className="text-2xl font-thin capitalize">
-                    {category ? `${category} Collection` : "All Products"}
-                </div>
+                    {categories.length > 0
+                        ? `${categories.join(", ")} Collection`
+                        : "All Products"}                </div>
                 <div className="text-4xl pt-4">SHOP</div>
             </div>
 
