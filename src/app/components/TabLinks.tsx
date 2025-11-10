@@ -13,8 +13,8 @@ const tabs = [
 
 export default function TabLinks({ category }: { category: "men" | "women" | "kids" }) {
     const router = useRouter();
-
     const handleClick = (tab: string) => {
+        
         router.push(`/${category}/${tab}`); // navigate to new page like /women/latest
     };
 

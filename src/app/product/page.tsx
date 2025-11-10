@@ -9,16 +9,30 @@ function ProductContent() {
     const searchParams = useSearchParams();
     const categoryParam = searchParams.get("category");
 
-    // 🧠 Handle single, multiple, or no categories
+    //  Handle single, multiple, or no categories
     const categories = categoryParam
         ? categoryParam.split(",").map((c) => c.trim().toLowerCase())
         : [];
 
-    // 🧮 Filter logic: show all if no category, else match any
+    //  Filter logic: show all if no category, else match any
     const filteredProducts =
         categories.length > 0
             ? products.filter((p) => categories.includes(p.category.toLowerCase()))
             : products;
+
+    const hasMultipleMainCategories =
+        ["men", "women", "kids"].filter((cat) => categories.includes(cat)).length > 1;
+
+    const backLink = hasMultipleMainCategories
+        ? "/" // if came from the combined ShopNowSection
+        : categories.includes("women")
+            ? "/women"
+            : categories.includes("men")
+                ? "/men"
+                : categories.includes("kids")
+                    ? "/kids"
+                    : "/";
+
     return (
         <section className="py-8">
 
@@ -26,7 +40,7 @@ function ProductContent() {
             {/* Header */}
             <div className="relavtive flex justify-center items-center flex-col border-t border-b border-zinc-500 py-10 mt-12">
                 <Link
-                    href={categories.length > 1 ? "/" : `/product?category=${categories[0]}`}
+                    href={backLink}
                     className="absolute top-22 left-3 flex items-center gap-2 mb-4 text-zinc-700 hover:text-black transition-colors">
                     <span className="text-lg font-semibold">Go back</span>
                     <img className="h-6 w-6" src="/svgs/goback.svg" alt="ecomx" />
