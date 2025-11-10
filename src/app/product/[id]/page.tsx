@@ -23,6 +23,10 @@ export default function ProductPage({ params }: PageProps) {
     const [selectedColor, setSelectedColor] = useState("");
     const [quantity, setQuantity] = useState(1);
 
+
+
+
+
     if (!product) {
         return (
             <div className="min-h-screen flex items-center justify-center p-6">
@@ -48,7 +52,7 @@ export default function ProductPage({ params }: PageProps) {
                         {/* Thumbnail list */}
                         <div className="flex md:flex-col gap-2 order-2 md:order-1">
 
-                            {product.images?.map((img, index) => (
+                            {product.images?.slice(0, 6).map((img, index) => (
                                 <img
                                     key={index}
                                     src={img}
@@ -80,7 +84,8 @@ export default function ProductPage({ params }: PageProps) {
                                                 setSelectedImage(product.images[i - 1]);
                                             }
                                         }}
-                                        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/20 shadow-md p-2"
+
+                                        className="focus:outline-none focus:ring-0 absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/20 shadow-md p-2"
                                     >
                                         ❮
                                     </button>
@@ -92,7 +97,7 @@ export default function ProductPage({ params }: PageProps) {
                                                 setSelectedImage(product.images[i + 1]);
                                             }
                                         }}
-                                        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/20 shadow-md p-2"
+                                        className="focus:outline-none focus:ring-0 absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-white/20 shadow-md p-2"
                                     >
                                         ❯
                                     </button>
