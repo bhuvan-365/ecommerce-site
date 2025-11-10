@@ -35,7 +35,7 @@ export const products: Product[] = [
         tabs: ["streetwear"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["black", "navy", "gray", "olive"],
-        images: ["/mens/men1.avif", "/mens/men2.avif", "/productImg/creamshirt.webp"],
+        images: ["/mens/men1.avif", "/mens/men2.avif", "/productImg/creamshirt.webp", "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg", " /mens/men2.avif", "https://k72.ca/uploads/teamMembers/Lawrence_480x640-480x640.jpg",],
         rating: 4.8,
         ratingCount: 234,
         soldCount: 1200,

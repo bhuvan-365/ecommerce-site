@@ -41,7 +41,7 @@ export default function ProductPage({ params }: PageProps) {
         <div className="min-h-screen bg-white px-6 py-10 md:px-12 mt-12">
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
                 {/* Left Section */}
-                <div className="flex flex-col md:flex-row gap-4 sticky top-24 s h-[90vh]">
+                <div className="flex flex-col md:flex-row gap-4 sticky top-22 h-fit">
                     {/* Thumbnail list */}
                     <div className="flex md:flex-col gap-2 order-2 md:order-1">
 
@@ -108,7 +108,7 @@ export default function ProductPage({ params }: PageProps) {
 
                     </div>
                     <h1 className="text-2xl md:text-3xl font-semibold">{product.name}</h1>
-                    <div className="text-2xl md:text-2xl text-zinc-600 w-full">{product.description}</div>
+                    <div className="text-xl md:text-[1.2rem] leading-6 text-zinc-600 w-full">{product.description}</div>
                     <div className=" flex justify-between items-center py-2">
                         <div className=" font-semibold flex justify-start items-center gap-1 text-lg text-black/70">
 
@@ -133,6 +133,24 @@ export default function ProductPage({ params }: PageProps) {
                                 <img className="w-6 h-6" src="/svgs/share.svg" alt="share" />
                             </div>
                         </div>
+                    </div>
+
+
+
+
+                    <div className="py-8 pt-10 flex justify-start items-center gap-3">
+                        <p className="text-3xl font-bold text-red-500">
+                            {product.price}
+                        </p>
+                        {product.oldPrice && (
+                            <p className=" line-through text-xl font-semibold text-zinc-600">
+                                {product.oldPrice}
+                            </p>
+                        )}
+
+                        {product.discount && (
+                            <div className=" bg-green-700/70 text-white px-4 py-1.5 rounded-sm font-semibold text-lg"> {product.discount}</div>
+                        )}
                     </div>
 
                     {/* Colour */}
@@ -169,22 +187,6 @@ export default function ProductPage({ params }: PageProps) {
                     </div>
 
 
-                    <div className="py-8 pt-10 flex justify-start items-center gap-3">
-                        <p className="text-3xl font-bold text-red-500">
-                            {product.price}
-                        </p>
-                        {product.oldPrice && (
-                            <p className=" line-through text-xl font-semibold text-zinc-600">
-                                {product.oldPrice}
-                            </p>
-                        )}
-
-                        {product.discount && (
-                            <div className=" bg-green-700/70 text-white px-4 py-1.5 rounded-sm font-semibold text-lg"> {product.discount}</div>
-                        )}
-                    </div>
-
-
 
                     {product.sizes && (
                         <div className="mt-4">
@@ -217,22 +219,24 @@ export default function ProductPage({ params }: PageProps) {
                     )}
 
 
-                    <div className="flex justify-center items-center  my-12">
+                    <div className="flex justify-center gap-10 items-start  my-12">
                         {/* Quantity Selector */}
-                        <div className="  w-[30%]  ">
-                            <div className="flex items-center justify-between w-fit gap-3 border mx-auto">
+                        <div className="w-[30%]  ">
+                            <div className="flex items-center justify-between  gap-3 border mx-auto">
                                 <button
                                     onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                                    className=" px-3 py-1 rounded"
+                                    className="    px-3 py-3 rounded focus:outline-none focus:ring-0"
                                 >
-                                    -
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="currentColor" d="M15 9H1V7h14z" /></svg>
+
                                 </button>
-                                <span>{quantity}</span>
+                                <span className="text-2xl text-zinc-600 font-semibold">{quantity}</span>
                                 <button
                                     onClick={() => setQuantity(q => q + 1)}
-                                    className=" px-3 py-1 rounded"
+                                    className=" px-3 py-3 rounded focus:outline-none focus:ring-0
+"
                                 >
-                                    +
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 4h2v7h7v2h-7v7h-2v-7H4v-2h7z" /></svg>
                                 </button>
                             </div>
                         </div>
