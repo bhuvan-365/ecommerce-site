@@ -51,7 +51,7 @@ export const products: Product[] = [
         hoverImage: "/productImg/onepiece.jpg",
         description: "Soft-touch cotton overshirt with a relaxed fit for layering.",
         category: "men",
-        tabs: ["weekday"],
+        tabs: ["streetwear"],
         sizes: ["S", "M", "L", "XL"],
         colorAvai: ["beige", "olive", "tan", "brown"],
         rating: 4.3,
