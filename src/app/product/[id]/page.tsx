@@ -162,7 +162,7 @@ export default function ProductPage({ params }: PageProps) {
                         </div>
 
                         {/* Colour */}
-                        <div className="mt-3 flex flex-col justify-start items-start">
+                        {/* <div className="mt-3 flex flex-col justify-start items-start">
 
                             <div className="py-2 ">
 
@@ -174,7 +174,7 @@ export default function ProductPage({ params }: PageProps) {
                                                 <button
                                                     key={idx}
                                                     onClick={() => setSelectedColor(col)}
-                                                    className={`bg-black/50 hover:bg-black rounded text-white px-4 py-2 text-sm mx-1
+                                                    className={`bg-black/50 hover:bg-black rounded text-white px-4 py-2 text-sm mx-1 capitalize
                                                     
                                                     ${selectedColor === col
                                                             ? "border-black bg-black text-white"
@@ -192,7 +192,51 @@ export default function ProductPage({ params }: PageProps) {
 
                             </div>
 
-                        </div>
+                        </div> */}
+
+                        {product.colorAvai && (
+                            <div className="mt-4">
+                                <h3 className="font-semibold uppercase">Select Color:</h3>
+                                <div className="flex gap-1.5 mt-2 flex-wrap">
+                                    {product.colorAvai.map((col, idx) => {
+                                        // Normalize color name for inline style
+                                        const colorValue = col.toLowerCase();
+
+                                        // Determine contrasting text color
+                                        const textColor =
+                                            colorValue === "white"
+                                                ? "text-black"
+                                                : colorValue === "black"
+                                                    ? "text-white"
+                                                    : "text-white";
+
+                                        // Add border for light colors to make them visible
+                                        const borderColor =
+                                            colorValue === "white" || colorValue === "yellow"
+                                                ? "border-gray-400"
+                                                : "border-transparent";
+
+                                        return (
+                                            <button
+                                                key={idx}
+                                                onClick={() => setSelectedColor(col)}
+                                                className={`rounded px-4 py-2 text-sm mx-1 capitalize font-semibold border ${borderColor} ${textColor} transition-all duration-300 focus:outline-0
+              ${selectedColor === col
+                                                        ? "ring-2 ring-offset-2 ring-black scale-105"
+                                                        : ""
+                                                    }`}
+                                                style={{
+                                                    backgroundColor: colorValue,
+                                                }}
+                                            >
+                                                {col}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
 
 
 

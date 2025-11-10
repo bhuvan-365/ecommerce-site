@@ -53,7 +53,7 @@ export default function HorizontalScrollPage() {
                                             <img
                                                 src={p.image}
                                                 alt={p.name}
-                                                className="w-full h-full object-cover transition-all duration-300 ease-in-out"
+                                                className="w-full h-full object-cover object-top transition-all duration-300 ease-in-out"
                                             />
 
                                             <div className="absolute bottom-[30%] right-[10%] flex justify-center items-center gap-2.5 w-fit h-5">
