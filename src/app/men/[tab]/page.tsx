@@ -40,7 +40,7 @@ const MensTabPage = () => {
             {/* Section Header */}
             <div className="relative flex justify-center items-center flex-col border-t border-b border-zinc-500 py-10 mt-12">
                 <Link href={`/men`} className="absolute top-2 left-3 flex items-center gap-2 mb-4 text-zinc-700 hover:text-black transition-colors">
-                    <span className="text-lg font-semibold">Go back</span>
+                    <span className="text-lg font-semibold hidden md:block">Go back</span>
                     <img className="h-6 w-6" src="/svgs/goback.svg" alt="ecomx" />
                 </Link>
                 <div className="text-2xl font-thin capitalize">men / {tab}</div>

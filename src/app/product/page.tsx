@@ -42,7 +42,7 @@ function ProductContent() {
                 <Link
                     href={backLink}
                     className="absolute top-22 left-3 flex items-center gap-2 mb-4 text-zinc-700 hover:text-black transition-colors">
-                    <span className="text-lg font-semibold">Go back</span>
+                    <span className="text-lg font-semibold hidden md:block">Go back</span>
                     <img className="h-6 w-6" src="/svgs/goback.svg" alt="ecomx" />
                 </Link>
                 <div className="text-2xl font-thin capitalize">

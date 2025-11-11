@@ -13,9 +13,7 @@ const page = () => {
     <>
 
       <HeroSec />
-      {/* <Trendings /> */}
-      <Trending />
-      {/* <Latest /> */}
+      {/* <Trending /> */}
       <Hotpick />
       <ShopNowSection category={["men", "women", "kids"]} />
       <Brandlogo />
