@@ -42,7 +42,7 @@ type EmblaOptions = {
 const options: EmblaOptions = {
     axis: "y",
     loop: false,
-    dragFree: false,
+    dragFree: true,
     align: "start",
 };
 
@@ -51,25 +51,26 @@ const HeroEmbla: React.FC = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [isPinned, setIsPinned] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
-    const isScrolling = useRef(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const isScrollingRef = useRef(false);
 
-    // Watch scroll position to detect when to pin/unpin
+    // Detect when section is in view and pin/unpin
     useEffect(() => {
-        const section = sectionRef.current;
-        if (!section) return;
-
         const handleScroll = () => {
-            const rect = section.getBoundingClientRect();
-            const top = rect.top;
-            const bottom = rect.bottom;
+            const section = sectionRef.current;
+            if (!section) return;
 
-            // pin when section hits top and still in view
-            if (top <= 0 && bottom > window.innerHeight) {
+            const rect = section.getBoundingClientRect();
+
+            // Pin section when it hits top and slides remain
+            if (rect.top <= 0 && rect.bottom > window.innerHeight) {
                 setIsPinned(true);
-                document.body.style.overflow = "hidden"; // freeze page scroll
-            } else {
+                document.body.style.overflow = "hidden";
+            }
+            // Unpin when user scrolls past the section
+            else {
                 setIsPinned(false);
-                document.body.style.overflow = "auto"; // restore scroll
+                document.body.style.overflow = "auto";
             }
         };
 
@@ -80,91 +81,107 @@ const HeroEmbla: React.FC = () => {
         };
     }, []);
 
-    // Embla + scroll up/down navigation
+    // Handle wheel scroll for slider navigation (only when pinned)
     useEffect(() => {
-        if (!emblaApi) return;
-
-        const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
-        emblaApi.on("select", onSelect);
+        if (!emblaApi || !isPinned) return;
 
         const handleWheel = (e: WheelEvent) => {
-            if (!isPinned) return; // only active while pinned
-            if (isScrolling.current) return;
+            if (isScrollingRef.current) return;
 
             const delta = e.deltaY;
             if (Math.abs(delta) < 30) return;
 
-            if (delta > 0 && emblaApi.canScrollNext()) {
-                e.preventDefault();
-                emblaApi.scrollNext();
-                tempBlock();
-            } else if (delta < 0 && emblaApi.canScrollPrev()) {
-                e.preventDefault();
-                emblaApi.scrollPrev();
-                tempBlock();
-            } else if (delta > 0 && !emblaApi.canScrollNext()) {
-                // last slide → allow page to scroll again
-                document.body.style.overflow = "auto";
-                setIsPinned(false);
-            } else if (delta < 0 && !emblaApi.canScrollPrev()) {
-                // first slide → allow scroll upward
-                document.body.style.overflow = "auto";
-                setIsPinned(false);
+            e.preventDefault();
+
+            if (delta > 0) {
+                // Scroll down → next slide
+                if (emblaApi.canScrollNext()) {
+                    emblaApi.scrollNext();
+                    blockScroll();
+                } else {
+                    // At last slide, allow normal scroll
+                    document.body.style.overflow = "auto";
+                    setIsPinned(false);
+                }
+            } else {
+                // Scroll up → previous slide
+                if (emblaApi.canScrollPrev()) {
+                    emblaApi.scrollPrev();
+                    blockScroll();
+                } else {
+                    // At first slide, allow normal scroll
+                    document.body.style.overflow = "auto";
+                    setIsPinned(false);
+                }
             }
         };
 
-        const tempBlock = () => {
-            isScrolling.current = true;
-            setTimeout(() => (isScrolling.current = false), 800);
+        const blockScroll = () => {
+            isScrollingRef.current = true;
+            setTimeout(() => {
+                isScrollingRef.current = false;
+            }, 600);
         };
 
         window.addEventListener("wheel", handleWheel, { passive: false });
+        return () => window.removeEventListener("wheel", handleWheel);
+    }, [emblaApi, isPinned]);
+
+    // Update selected index on slide change
+    useEffect(() => {
+        if (!emblaApi) return;
+
+        const onSelect = () => {
+            setSelectedIndex(emblaApi.selectedScrollSnap());
+        };
+
+        emblaApi.on("select", onSelect);
         return () => {
-            window.removeEventListener("wheel", handleWheel);
             emblaApi.off("select", onSelect);
         };
-    }, [emblaApi, isPinned]);
+    }, [emblaApi]);
 
     return (
         <section ref={sectionRef} className="relative h-[300vh]">
-            {/* Pinned Slider */}
+            {/* Sticky Pinned Slider */}
             <div
-                className={`sticky top-0 h-screen w-full overflow-hidden ${isPinned ? "pointer-events-auto" : "pointer-events-none"
-                    }`}
+                ref={containerRef}
+                className="sticky top-0 h-screen w-screen overflow-hidden bg-black"
             >
-                <div className="embla h-full" ref={emblaRef}>
-                    <div className="embla__container flex flex-col h-full">
+                {/* Embla Carousel Container */}
+                <div className="embla h-full w-full" ref={emblaRef}>
+                    <div className="embla__container h-full">
                         {slides.map((item, index) => (
                             <div
                                 key={index}
-                                className="embla__slide flex-shrink-0 h-screen w-full relative"
+                                className="embla__slide flex-shrink-0 h-screen w-screen relative"
                             >
+                                {/* Background Image */}
                                 <img
                                     src={item.image}
                                     alt={item.title}
-
-                                    className="w-full h-full object-center object-cover brightness-[0.65]"
-
+                                    className="w-full h-full object-cover brightness-[0.65]"
                                 />
 
-                                <div className="absolute inset-0 flex flex-col justify-center items-center md:items-start px-10 md:px-20 text-white z-10">
+                                {/* Content Overlay */}
+                                <div className="absolute inset-0 flex flex-col justify-center items-center md:items-start px-6 md:px-20 text-white z-10">
                                     <motion.div
                                         initial={{ opacity: 0, y: 40 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.7 }}
-                                        className="max-w-xl"
+                                        className="max-w-2xl"
                                     >
-                                        <h1 className="text-5xl md:text-6xl font-bold mb-4">
+                                        <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-tight">
                                             {item.title}
                                         </h1>
-                                        <p className="text-gray-200 mb-6">{item.desc}</p>
-                                        <div className="text-red-400 text-3xl font-bold">
+                                        <p className="text-gray-200 text-lg mb-6">{item.desc}</p>
+                                        <div className="text-red-400 text-4xl font-bold">
                                             {item.price}
                                         </div>
-                                        <div className="text-gray-300 line-through">
+                                        <div className="text-gray-400 line-through text-xl">
                                             {item.oldPrice}
                                         </div>
-                                        <div className="text-sm text-red-400 mt-2">{item.offer}</div>
+                                        <div className="text-sm text-red-400 mt-3">{item.offer}</div>
                                     </motion.div>
                                 </div>
                             </div>
@@ -172,16 +189,29 @@ const HeroEmbla: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Dots */}
-                <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-20">
+                {/* Slide Indicator Dots - Bottom Center */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
                     {slides.map((_, index) => (
-                        <button
+                        <div
                             key={index}
-                            onClick={() => emblaApi?.scrollTo(index)}
-                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${selectedIndex === index ? "bg-white scale-125" : "bg-white/40"
+                            className={`transition-all duration-300 rounded-full ${selectedIndex === index
+                                ? "w-8 h-2.5 bg-white"
+                                : "w-2.5 h-2.5 bg-white/40"
                                 }`}
                         />
                     ))}
+                </div>
+
+                {/* Scroll Indicator */}
+                <div className="absolute top-1/2 right-6 -translate-y-1/2 flex flex-col items-center gap-2 z-20">
+                    <span className="text-white text-xs uppercase tracking-widest">Scroll</span>
+                    <motion.div
+                        animate={{ y: [0, 8, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                        className="text-white"
+                    >
+                        ↓
+                    </motion.div>
                 </div>
             </div>
         </section>

@@ -6,6 +6,7 @@ import Trending from './home/Trending'
 import Brandlogo from './home/Brandlogo'
 import Hotpick from './home/Hotpick'
 import ShopNowSection from './components/ShopNow'
+import EssentialsRefined from './components/EssentialsRefined'
 
 
 const page = () => {
@@ -13,8 +14,9 @@ const page = () => {
     <>
 
       <HeroSec />
-      {/* <Trending /> */}
-      <Hotpick />
+      <Trending />
+      {/* <Hotpick /> */}
+      <EssentialsRefined category="men" />
       <ShopNowSection category={["men", "women", "kids"]} />
       <Brandlogo />
 
