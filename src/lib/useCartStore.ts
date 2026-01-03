@@ -64,16 +64,19 @@
 //                 return state.cartItems.some((item) => item.id === productId);
 //             },
 
+
 //             getCartItemQuantity: (productId: number) => {
 //                 const state = get();
 //                 const item = state.cartItems.find(item => item.id === productId);
 //                 return item ? item.quantity : 0;
 //             },
 
+
 //             getTotalPrice: () => {
 //                 const state = get();
 //                 return state.cartItems.reduce((total, item) => {
 //                     const price = parseFloat(item.price.replace('$', ''));
+
 //                     return total + price * item.quantity;
 //                 }, 0);
 //             },
@@ -86,6 +89,7 @@
 //             name: 'cart-storage', // name of the item in localStorage
 //         }
 //     )
+
 // );
 
 
