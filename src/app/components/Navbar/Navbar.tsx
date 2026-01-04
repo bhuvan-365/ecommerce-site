@@ -48,8 +48,8 @@ const Navbar = () => {
                 {/* Logo */}
                 <Link href="/">
                     <div className="flex justify-center items-center gap-2">
-                        <img src="/logo2.svg" alt="Logo" className="h-8 w-auto" />
-                        <div className="text-2xl font-bold">EcomX</div>
+                        <img src="/logoclo.jpg" alt="Logo" className="h-12 rounded-full w-auto" />
+                        <div className="text-3xl tracking-wider font-bold ">EcomX</div>
                     </div>
                 </Link>
 
