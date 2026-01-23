@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -32,22 +32,34 @@ const Hero: React.FC = () => {
     const imageDivRef = useRef<HTMLDivElement | null>(null);
     const imageRef = useRef<HTMLImageElement | null>(null);
 
-    const imageArray = [
-        'https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/Olivier_480x640-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/Lawrence_480x640-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/HugoJoseph_480x640-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/ChantalG_480x640-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/MyleneS_480x640-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/SophieA_480x640-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/Claire_480x640-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/Michele_480X640-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/MEL_480X640-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/CAMILLE_480X640_2-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/MAXIME_480X640_2-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/MEGGIE_480X640_2-480x640.jpg',
-        'https://k72.ca/uploads/teamMembers/joel_480X640_3-480x640.jpg',
-    ]
+    const imageArray = useMemo(
+        () => [
+            "https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg",
+            "https://k72.ca/uploads/teamMembers/Olivier_480x640-480x640.jpg",
+            // "https://k72.ca/uploads/teamMembers/Lawrence_480x640-480x640.jpg",
+            "https://k72.ca/uploads/teamMembers/HugoJoseph_480x640-480x640.jpg",
+            "https://k72.ca/uploads/teamMembers/ChantalG_480x640-480x640.jpg",
+            "https://k72.ca/uploads/teamMembers/MyleneS_480x640-480x640.jpg",
+            "https://k72.ca/uploads/teamMembers/SophieA_480x640-480x640.jpg",
+            // "https://k72.ca/uploads/teamMembers/Claire_480x640-480x640.jpg",
+            "https://k72.ca/uploads/teamMembers/Michele_480X640-480x640.jpg",
+            "https://k72.ca/uploads/teamMembers/MEL_480X640-480x640.jpg",
+            "https://k72.ca/uploads/teamMembers/CAMILLE_480X640_2-480x640.jpg",
+            // "https://k72.ca/uploads/teamMembers/MAXIME_480X640_2-480x640.jpg",
+            "https://k72.ca/uploads/teamMembers/MEGGIE_480X640_2-480x640.jpg",
+            "https://k72.ca/uploads/teamMembers/joel_480X640_3-480x640.jpg",
+        ],
+        []
+    );
+
+    useEffect(() => {
+        imageArray.forEach((src) => {
+            const img = new Image();
+            img.decoding = "async";
+            img.loading = "eager";
+            img.src = src;
+        });
+    }, [imageArray]);
     useGSAP(() => {
         if (!imageDivRef.current || !imageRef.current) return;
 
@@ -120,10 +132,10 @@ const Hero: React.FC = () => {
             <div className="absolute h-[100vh] inset-0 bg-black/20">
             </div>
 
-            <div className="section2 text-black relative mb-20">
+            <div className="section2 text-black relative mb-20 overflow-hidden">
                 <div
                     ref={imageDivRef}
-                    className="z-[30] absolute h-[160px] lg:h-[24vw] rounded-md w-[150px] lg:w-[20vw] sm:top-20 lg:top-0 top-10 sm:left-[25vw] left-[10vw] overflow-hidden"
+                    className="z-[30] absolute mt-10 h-[160px] w-[150px] max-h-[45vw] max-w-[45vw] rounded-md overflow-hidden sm:h-[200px] sm:w-[180px] lg:h-[24vw] lg:w-[20vw] top-10 sm:top-20 lg:top-0 left-4 sm:left-[10vw] lg:left-[15vw]"
                 >
                     <img
                         ref={imageRef}
@@ -134,11 +146,11 @@ const Hero: React.FC = () => {
                 </div>
                 <div className="relative poppins !z-40">
                     <div className="mt-16">
-                        <h1 className=" text-5xl sm:text-[16vw] text-center uppercase leading-[18vw]">
+                        <h1 className="text-5xl sm:text-[16vw] text-center uppercase leading-[18vw] max-w-full break-words">
                             EComx <br /> Presents
                         </h1>
-                        <div className="pl-[30%] sm:pl-[40%] mt-20 p-3">
-                            <p className="text-xl sm:text-6xl lg:text-[4rem] leading-tight ">
+                        <div className="pl-4 sm:pl-[20%] lg:pl-[30%] mt-10 sm:mt-16 p-3 max-w-full">
+                            <p className="text-xl sm:text-5xl lg:text-[4rem] leading-tight max-w-full">
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 At EcomX, we make fashion for everyone — combining quality, comfort, and affordability. Our pieces reflect personality and story, not fleeting trends. We focus on timeless style that lasts, making fashion accessible, sustainable, and real. Style with substance, for real lives.</p>
                         </div>
