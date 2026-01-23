@@ -122,7 +122,7 @@ function ProductContent() {
                         }}
                     >
                         <span className="font-semibold text-xl">sort by</span>
-                        <img src="/plus.svg" alt="sort" />
+                        <img src={sortOpen ? "/minus.svg" : "/plus.svg"} alt="sort" />
                     </button>
                     <button
                         className="flex justify-center gap-2 items-center"
