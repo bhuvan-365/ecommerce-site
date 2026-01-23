@@ -136,8 +136,13 @@ function ProductContent() {
                     </button>
                 </div>
 
-                {sortOpen && (
-                    <div className="border-y border-zinc-300 py-4 text-sm sm:text-base normal-case">
+                <div
+                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                        sortOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
+                >
+                    <div className="overflow-hidden">
+                        <div className="border-y border-zinc-300 py-4 text-sm sm:text-base normal-case">
                         <div className="flex flex-wrap gap-3">
                             <button
                                 className={`px-4 py-2 border rounded-full ${sortOption === "none" ? "bg-black text-white" : "bg-white"}`}
@@ -164,11 +169,17 @@ function ProductContent() {
                                 Discounted
                             </button>
                         </div>
+                        </div>
                     </div>
-                )}
+                </div>
 
-                {filterOpen && (
-                    <div className="border-y border-zinc-300 py-4 text-sm sm:text-base normal-case">
+                <div
+                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                        filterOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
+                >
+                    <div className="overflow-hidden">
+                        <div className="border-y border-zinc-300 py-4 text-sm sm:text-base normal-case">
                         <div className="flex flex-wrap gap-3 mb-6">
                             <button
                                 className={`px-4 py-2 border rounded-full ${discountFilter === "all" ? "bg-black text-white" : "bg-white"}`}
@@ -250,8 +261,9 @@ function ProductContent() {
                                 Clear filters
                             </button>
                         </div>
+                        </div>
                     </div>
-                )}
+                </div>
             </div>
 
             {/*  Product Grid */}
