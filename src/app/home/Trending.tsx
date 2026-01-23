@@ -150,7 +150,7 @@ const HeroEmbla: React.FC = () => {
             {/* Sticky Pinned Slider */}
             <div
                 ref={containerRef}
-                className="sticky top-0 h-screen w-screen overflow-hidden bg-black"
+                className="md:sticky md:top-0 h-[80vh] sm:h-screen w-full overflow-hidden bg-black"
             >
                 {/* Embla Carousel Container */}
                 <div className="embla h-full w-full" ref={emblaRef}>
@@ -158,7 +158,7 @@ const HeroEmbla: React.FC = () => {
                         {slides.map((item, index) => (
                             <div
                                 key={index}
-                                className="embla__slide flex-shrink-0 h-screen w-screen relative"
+                                className="embla__slide flex-shrink-0 h-full w-full relative"
                             >
                                 {/* Background Image */}
                                 <img
@@ -168,24 +168,28 @@ const HeroEmbla: React.FC = () => {
                                 />
 
                                 {/* Content Overlay */}
-                                <div className="absolute inset-0 flex flex-col justify-center items-center md:items-start px-6 md:px-20 text-white z-10">
+                                <div className="absolute inset-0 flex flex-col justify-center items-center md:items-start px-4 sm:px-8 md:px-20 text-white z-10">
                                     <motion.div
                                         initial={{ opacity: 0, y: 40 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ duration: 0.7 }}
-                                        className="max-w-2xl"
+                                        className="max-w-2xl text-center md:text-left"
                                     >
-                                        <h1 className="text-5xl md:text-7xl font-bold mb-4 leading-tight">
+                                        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 leading-tight">
                                             {item.title}
                                         </h1>
-                                        <p className="text-gray-200 text-lg mb-6">{item.desc}</p>
-                                        <div className="text-red-400 text-4xl font-bold">
+                                        <p className="text-gray-200 text-sm sm:text-lg mb-5 sm:mb-6">
+                                            {item.desc}
+                                        </p>
+                                        <div className="text-red-400 text-2xl sm:text-4xl font-bold">
                                             {item.price}
                                         </div>
-                                        <div className="text-gray-400 line-through text-xl">
+                                        <div className="text-gray-400 line-through text-base sm:text-xl">
                                             {item.oldPrice}
                                         </div>
-                                        <div className="text-sm text-red-400 mt-3">{item.offer}</div>
+                                        <div className="text-xs sm:text-sm text-red-400 mt-3">
+                                            {item.offer}
+                                        </div>
                                     </motion.div>
                                 </div>
                             </div>
@@ -194,20 +198,20 @@ const HeroEmbla: React.FC = () => {
                 </div>
 
                 {/* Slide Indicator Dots - Bottom Center */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+                <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
                     {slides.map((_, index) => (
                         <div
                             key={index}
                             className={`transition-all duration-300 rounded-full ${selectedIndex === index
-                                ? "w-8 h-2.5 bg-white"
-                                : "w-2.5 h-2.5 bg-white/40"
+                                ? "w-6 h-2 sm:w-8 sm:h-2.5 bg-white"
+                                : "w-2 h-2 sm:w-2.5 sm:h-2.5 bg-white/40"
                                 }`}
                         />
                     ))}
                 </div>
 
                 {/* Side Mention */}
-                <div className="absolute top-1/2 right-6 -translate-y-1/2 z-20">
+                <div className="absolute top-1/2 right-6 -translate-y-1/2 z-20 hidden sm:block">
                     <div className="rounded-full border border-white/40 px-3 py-1 text-xs uppercase tracking-widest text-white/90 bg-white/10 backdrop-blur-sm">
                         Trending picks
                     </div>
