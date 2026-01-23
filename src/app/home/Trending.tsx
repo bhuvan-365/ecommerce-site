@@ -53,6 +53,8 @@ const HeroEmbla: React.FC = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const isScrollingRef = useRef(false);
+    const scrollAccumulatorRef = useRef(0);
+    const SCROLL_THRESHOLD = 180;
 
     // Detect when section is in view and pin/unpin
     useEffect(() => {
@@ -89,38 +91,36 @@ const HeroEmbla: React.FC = () => {
             if (isScrollingRef.current) return;
 
             const delta = e.deltaY;
-            if (Math.abs(delta) < 30) return;
+            if (Math.abs(delta) < 5) return;
+
+            const canScroll = delta > 0 ? emblaApi.canScrollNext() : emblaApi.canScrollPrev();
+            if (!canScroll) {
+                document.body.style.overflow = "auto";
+                setIsPinned(false);
+                scrollAccumulatorRef.current = 0;
+                return;
+            }
 
             e.preventDefault();
+            scrollAccumulatorRef.current += delta;
 
-            if (delta > 0) {
-                // Scroll down → next slide
-                if (emblaApi.canScrollNext()) {
-                    emblaApi.scrollNext();
-                    blockScroll();
-                } else {
-                    // At last slide, allow normal scroll
-                    document.body.style.overflow = "auto";
-                    setIsPinned(false);
-                }
+            if (Math.abs(scrollAccumulatorRef.current) < SCROLL_THRESHOLD) return;
+
+            if (scrollAccumulatorRef.current > 0) {
+                emblaApi.scrollNext();
             } else {
-                // Scroll up → previous slide
-                if (emblaApi.canScrollPrev()) {
-                    emblaApi.scrollPrev();
-                    blockScroll();
-                } else {
-                    // At first slide, allow normal scroll
-                    document.body.style.overflow = "auto";
-                    setIsPinned(false);
-                }
+                emblaApi.scrollPrev();
             }
+
+            scrollAccumulatorRef.current = 0;
+            blockScroll();
         };
 
         const blockScroll = () => {
             isScrollingRef.current = true;
             setTimeout(() => {
                 isScrollingRef.current = false;
-            }, 600);
+            }, 300);
         };
 
         window.addEventListener("wheel", handleWheel, { passive: false });
@@ -142,7 +142,11 @@ const HeroEmbla: React.FC = () => {
     }, [emblaApi]);
 
     return (
-        <section ref={sectionRef} className="relative h-[300vh]">
+        <section
+            ref={sectionRef}
+            className="relative"
+            style={{ height: `calc(100vh * ${slides.length})` }}
+        >
             {/* Sticky Pinned Slider */}
             <div
                 ref={containerRef}
@@ -202,16 +206,11 @@ const HeroEmbla: React.FC = () => {
                     ))}
                 </div>
 
-                {/* Scroll Indicator */}
-                <div className="absolute top-1/2 right-6 -translate-y-1/2 flex flex-col items-center gap-2 z-20">
-                    <span className="text-white text-xs uppercase tracking-widest">Scroll</span>
-                    <motion.div
-                        animate={{ y: [0, 8, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        className="text-white"
-                    >
-                        ↓
-                    </motion.div>
+                {/* Side Mention */}
+                <div className="absolute top-1/2 right-6 -translate-y-1/2 z-20">
+                    <div className="rounded-full border border-white/40 px-3 py-1 text-xs uppercase tracking-widest text-white/90 bg-white/10 backdrop-blur-sm">
+                        Trending picks
+                    </div>
                 </div>
             </div>
         </section>
