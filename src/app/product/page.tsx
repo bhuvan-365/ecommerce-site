@@ -121,7 +121,7 @@ function ProductContent() {
                             setFilterOpen(false);
                         }}
                     >
-                        <span className="font-semibold text-xl">sort by</span>
+                        <span className="font-semibold text-xl">Sort by</span>
                         <img src={sortOpen ? "/minus.svg" : "/plus.svg"} alt="sort" />
                     </button>
                     <button
