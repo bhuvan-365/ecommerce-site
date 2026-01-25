@@ -45,19 +45,19 @@ export default function ProductPage({ params }: PageProps) {
 
     return (
         <>
-            <div className="min-h-screen bg-white px-6 py-10 md:px-12 mt-12">
-                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="min-h-screen bg-white px-4 sm:px-6 py-8 sm:py-10 md:px-12 mt-12">
+                <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
                     {/* Left Section */}
-                    <div className="flex flex-col md:flex-row gap-4 sticky top-22 h-fit">
+                    <div className="flex flex-col md:flex-row gap-4 md:sticky md:top-22 h-fit">
                         {/* Thumbnail list */}
-                        <div className="flex md:flex-col gap-2 order-2 md:order-1">
+                        <div className="flex md:flex-col gap-2 order-2 md:order-1 overflow-x-auto md:overflow-visible">
 
                             {product.images?.slice(0, 6).map((img, index) => (
                                 <img
                                     key={index}
                                     src={img}
                                     alt={`thumbnail-${index}`}
-                                    className={`w-20 h-24 object-cover rounded-md cursor-pointer border ${selectedImage === img ? "border-black" : "border-gray-200"
+                                    className={`w-16 h-20 sm:w-20 sm:h-24 object-cover rounded-md cursor-pointer border ${selectedImage === img ? "border-black" : "border-gray-200"
                                         }`}
                                     onClick={() => setSelectedImage(img)}
                                 />
@@ -66,7 +66,7 @@ export default function ProductPage({ params }: PageProps) {
 
                         {/* Main Image */}
                         <div className="relative w-full order-1 md:order-2">
-                            <div className="w-full h-[86vh]">
+                            <div className="w-full h-[55vh] sm:h-[65vh] lg:h-[86vh]">
                                 <img
                                     src={selectedImage}
                                     alt={product.name}
@@ -117,7 +117,7 @@ export default function ProductPage({ params }: PageProps) {
                         </div>
                         <h1 className="text-2xl md:text-3xl font-semibold">{product.name}</h1>
                         <div className="text-xl md:text-[1.2rem] leading-6 text-zinc-600 w-full">{product.description}</div>
-                        <div className=" flex justify-between items-center py-2">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 py-2">
                             <div className=" font-semibold flex justify-start items-center gap-1 text-lg text-black/70">
 
                                 <div className="flex justify-start items-center gap-1 text-lg text-black/70">
@@ -146,7 +146,7 @@ export default function ProductPage({ params }: PageProps) {
 
 
 
-                        <div className="py-8 pt-10 flex justify-start items-center gap-3">
+                        <div className="py-6 sm:py-8 pt-8 sm:pt-10 flex flex-wrap justify-start items-center gap-3">
                             <p className="text-3xl font-bold text-red-500">
                                 {product.price}
                             </p>
@@ -253,7 +253,7 @@ export default function ProductPage({ params }: PageProps) {
                                         </p></div>
 
                                 </label>
-                                <div className="flex gap-2 mt-2">
+                                <div className="flex flex-wrap gap-2 mt-2">
                                     {product.sizes.map((size, idx) => (
                                         <button
                                             key={idx}
@@ -271,10 +271,10 @@ export default function ProductPage({ params }: PageProps) {
                         )}
 
 
-                        <div className="flex justify-center gap-10 items-start  my-12">
+                        <div className="flex flex-col sm:flex-row justify-center gap-6 sm:gap-10 items-stretch sm:items-start my-8 sm:my-12">
                             {/* Quantity Selector */}
-                            <div className="w-[30%]  ">
-                                <div className="flex items-center justify-between  gap-3 border mx-auto">
+                            <div className="w-full sm:w-[30%]">
+                                <div className="flex items-center justify-between gap-3 border mx-auto">
                                     <button
                                         onClick={() => setQuantity(q => Math.max(1, q - 1))}
                                         className="    px-3 py-3 rounded focus:outline-none focus:ring-0"
@@ -294,7 +294,7 @@ export default function ProductPage({ params }: PageProps) {
                             </div>
 
                             {/* Add to Cart Button */}
-                            <div className=" w-[70%]">
+                            <div className="w-full sm:w-[70%]">
                                 {/* <CartButton product={product} /> */}
 
                                 <CartButton
