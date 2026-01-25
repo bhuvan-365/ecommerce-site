@@ -4,6 +4,7 @@ import React from "react";
 import { useParams } from "next/navigation";
 import { products } from "@/lib/product";
 import Link from "next/link";
+import SortFilter from "@/app/components/SortFilter";
 
 const KidsTabPage = () => {
     const { tab } = useParams(); // e.g. "latest", "streetwear"
@@ -32,7 +33,7 @@ const KidsTabPage = () => {
         return kidss;
     };
 
-    const filtered = filterProducts(tab as string);
+    const baseProducts = filterProducts(tab as string);
 
     return (
         <section className="py-8">
@@ -46,62 +47,51 @@ const KidsTabPage = () => {
                 <div className="text-4xl pt-4">SHOP</div>
             </div>
 
-            {/* Sort & Filter Row */}
-            <div className="w-full h-20 flex px-5 justify-between items-center uppercase">
-                <div className="flex justify-center gap-2 items-center">
-                    <span className="font-semibold text-xl">sort by</span>
-                    <img src="/plus.svg" alt="ecomx" />
-                </div>
-                <div className="flex justify-center gap-2 items-center">
-                    <span className="font-semibold text-xl">filter</span>
-                    <img src="/filter.svg" alt="ecomx filter" />
-                </div>
-            </div>
-
-            {/* Products Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 px-2">
-                {filtered.map((item) => (
-                    <Link
-                        key={item.id}
-                        href={`/product/${item.id}`}
-                        className="group block"
-                    >
-                        {/* Product Image */}
-                        <div className="relative w-full aspect-[3/4] overflow-hidden">
-                            <img
-                                src={item.image}
-                                alt={item.name}
-                                className="w-full h-full object-cover absolute inset-0 transition-opacity duration-300 group-hover:opacity-0"
-                            />
-                            <img
-                                src={item.hoverImage}
-                                alt={`${item.name} hover`}
-                                className="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                            />
-                            {item.discount && (
-                                <div className="absolute bottom-4 left-4 bg-zinc-300 px-4 py-1.5 rounded-sm font-semibold text-md">
-                                    {item.discount}
+            <SortFilter products={baseProducts}>
+                {(filteredProducts) => (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 px-2">
+                        {filteredProducts.map((item) => (
+                            <Link
+                                key={item.id}
+                                href={`/product/${item.id}`}
+                                className="group block"
+                            >
+                                <div className="relative w-full aspect-[3/4] overflow-hidden">
+                                    <img
+                                        src={item.image}
+                                        alt={item.name}
+                                        className="w-full h-full object-cover absolute inset-0 transition-opacity duration-300 group-hover:opacity-0"
+                                    />
+                                    <img
+                                        src={item.hoverImage}
+                                        alt={`${item.name} hover`}
+                                        className="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                                    />
+                                    {item.discount && (
+                                        <div className="absolute bottom-4 left-4 bg-zinc-300 px-4 py-1.5 rounded-sm font-semibold text-md">
+                                            {item.discount}
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-                        </div>
 
-                        {/* Product Info */}
-                        <div className="px-4">
-                            <p className="mt-2 text-lg text-zinc-800">{item.name}</p>
-                            <div className="flex justify-start items-start gap-3">
-                                <p className="font-semibold text-lg text-red-500">
-                                    {item.price}
-                                </p>
-                                {item.oldPrice && (
-                                    <p className="font-semibold text-lg line-through">
-                                        {item.oldPrice}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
-                    </Link>
-                ))}
-            </div>
+                                <div className="px-4">
+                                    <p className="mt-2 text-lg text-zinc-800">{item.name}</p>
+                                    <div className="flex justify-start items-start gap-3">
+                                        <p className="font-semibold text-lg text-red-500">
+                                            {item.price}
+                                        </p>
+                                        {item.oldPrice && (
+                                            <p className="font-semibold text-lg line-through">
+                                                {item.oldPrice}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                )}
+            </SortFilter>
         </section>
     );
 };
